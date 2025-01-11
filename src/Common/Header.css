@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.Grid {
+    display: flex;
+}
+
+.Navigation {
+    background-color: rgb(64, 81, 83);
+    width: 100%;
+    margin: auto;
+    height: 2.5rem;
+
+}
+
+.Logos h1 {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 24px;
+    margin-left: 1.5rem;
+    color: white;
+}
+
+
+.NavBar-grid {
+    height: 2.5rem;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+nav ul {
+    display: flex;
+    gap: 2rem;
+    margin-right: 2.5rem;
+    list-style: none;
+    color: black;
+    height: 2.5rem;
+    align-items: center;
+}
+
+nav ul li {
+    font-size: 18px;
+    font-family: 'Courier New', Courier, monospace;
+    color: white;
+}
+
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+
+.Hamburger {
+    display: none;
+}
+
+.Hamburger button {
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+    border: 0;
+    text-align: center;
+}
+
+button h2 {
+    font-size: 24px;
+}
+
+@media screen and ( max-width:320px) ,(  max-width:768px) {
+    .Web-Menu {
+        display: none;
+    }
+
+    .Hamburger {
+        display: inline-block;
+    }
+
+    .Mobile-Web {
+        top: 40px;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        background-color: rgb(89, 101, 102);
+        z-index: 5;
+    
+        
+    }
+    
+    .Mobile-Web ul {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin:2.5rem auto;
+    }
+
+    .Mobile-Web ul li {
+       margin: 24px auto;
+      
+    }
+
+  
+    
+
+   
+}

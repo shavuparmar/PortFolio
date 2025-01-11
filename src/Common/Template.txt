@@ -1,0 +1,7 @@
+  <div className='MenuIcon'> <button onClick={() => SetShowmenu(!showmenu)} >
+                        {showmenu ?
+                            <h2>&times;</h2>
+                            :
+                            <h2>&#9776;</h2>
+                        }
+                    </button> </div>

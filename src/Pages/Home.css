@@ -1,0 +1,202 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.HeroSection {
+    display: flex;
+    margin: auto;
+    align-items: center;
+    justify-content: space-between;
+    padding:0 5rem;
+}
+
+.textBox h1 {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.ButtonDesign {
+    background-color: rgb(48, 67, 68);
+    color: white;
+    width: 95px;
+    height: 30px;
+    margin: 1rem 1rem;
+    border-radius: 1rem;
+}
+
+
+.Borders {
+    margin-left: 10px;
+    border: 2px solid black;
+    height: 100px;
+    width: 250px;
+    margin-bottom: 1rem;
+}
+
+.SocialMedia {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.SocialMedia img {
+    height: 62px;
+}
+
+
+/* Copy coded */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.AnimationSection {
+    overflow-x: hidden;
+}
+
+.SideAni {
+    border: 2px solid black;
+    height: 7rem;
+    width: 22rem;
+    margin-left: 10px;
+    display: flex;
+    animation: Animation 20s linear infinite reverse;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 10px 4px 10px 1px;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+}
+
+.SideAni img {
+    margin-left: 5px;
+    height: 80px;
+}
+
+.Run {
+    display: flex;
+    gap: 2.5rem;
+}
+
+h1 {
+    font-size: 28px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+.Skill-Grid {
+    display: grid;
+    grid-template-columns: 0.5fr 0.5fr 0fr;
+    gap: 1rem;
+
+}
+
+@media screen and (max-width:768px) {
+    .Skill-Grid {
+        grid-template-columns:0.5fr 0.5fr;
+        margin-left: 0px;
+    }
+
+    .Skill-Image img {
+        margin-left: 1rem;
+        height: 22px;
+    }
+    .About-Skill{
+        padding: 0;
+        margin-right:0px;
+    }
+
+}
+
+.Skill-Image img {
+    height: 20rem;
+    margin-left: 0.5rem;
+}
+
+.Skill-icon img {
+    height: 42px;
+    margin-left: 20px;
+
+}
+
+
+
+.Skill-Heading h1 {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.Skill-Border {
+    margin-top: 1.5rem;
+    width: 15rem;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.Skill-Border:hover {
+    background-color: rgb(192, 188, 188);
+    border-radius: 2rem;
+    box-shadow: 2px 2px 2px 2px;
+}
+
+.About-Skill {
+    display: flex;
+    gap: 5rem;
+    padding: 0 3.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@keyframes Animation {
+    0% {
+        margin-left: -500%;
+    }
+
+    100% {
+        margin-left: 500%;
+    }
+}
+
+@media screen and (max-width:320px),
+(max-width:768px) {
+
+    .HeroSection {
+        display: grid;
+        grid-template-columns: 1fr;
+        font-size: 14px;
+        margin-left: -60px;
+        width: 100%;
+    }
+
+    .HeroSection img {
+        width: 350px;
+        margin-left: -15px;
+    }
+}
