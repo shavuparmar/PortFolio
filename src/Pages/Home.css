@@ -9,7 +9,7 @@
     margin: auto;
     align-items: center;
     justify-content: space-between;
-    padding:0 5rem;
+    padding: 0 5rem;
 }
 
 .textBox h1 {
@@ -63,13 +63,23 @@
     width: 22rem;
     margin-left: 10px;
     display: flex;
-    animation: Animation 20s linear infinite reverse;
+    animation: Animation 25s linear infinite reverse;
     align-items: center;
-    gap: 10px;
     box-shadow: 10px 4px 10px 1px;
     margin-bottom: 1.5rem;
-    cursor: pointer;
+    
 }
+
+.Namesocial{
+    display: flex;
+    flex-direction: column;
+   
+}
+.Namesocial h3{
+    margin-top: -10px;
+    margin-top: -10px;
+}
+
 
 .SideAni img {
     margin-left: 5px;
@@ -79,6 +89,8 @@
 .Run {
     display: flex;
     gap: 2.5rem;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 h1 {
@@ -94,25 +106,10 @@ h1 {
 
 }
 
-@media screen and (max-width:768px) {
-    .Skill-Grid {
-        grid-template-columns:0.5fr 0.5fr;
-        margin-left: 0px;
-    }
 
-    .Skill-Image img {
-        margin-left: 1rem;
-        height: 22px;
-    }
-    .About-Skill{
-        padding: 0;
-        margin-right:0px;
-    }
-
-}
 
 .Skill-Image img {
-    height: 20rem;
+    height: 350px;
     margin-left: 0.5rem;
 }
 
@@ -151,7 +148,15 @@ h1 {
     flex-wrap: wrap;
     width: 100%;
 }
-
+.AnimationSection h1{
+    font-size: 24px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    
+}
+.SkillHeading{
+    margin-left: 20px;
+}
 
 
 
@@ -191,12 +196,51 @@ h1 {
         display: grid;
         grid-template-columns: 1fr;
         font-size: 14px;
-        margin-left: -60px;
+        margin-left: -40px;
         width: 100%;
+        margin-top: 15px;
     }
 
     .HeroSection img {
         width: 350px;
-        margin-left: -15px;
+
+    }
+
+    .Skill-Grid {
+        grid-template-columns: 1fr 05fr;
+        margin-left: 0px;
+        gap: 2px;
+        margin-left: 0;
+    }
+
+    .Skill-Image img {
+        margin-left: 5rem;
+        height: 250px;
+        margin-bottom: -3rem;
+    }
+
+    .About-Skill {
+        padding: 0;
+        margin-right: 0px;
+    }
+
+    .Skill-text h1 {
+        font-size: 18px;
+    }
+
+    .Skill-Border {
+        gap: 1;
+        width: 13rem;
+    }
+
+    .SideAni {
+        width: 14rem;
+        height: 3.5rem;
+    }
+    .SideAni img {
+        height: 32px;
+    }
+    .SideAni h1{
+        font-size: 18px;
     }
 }

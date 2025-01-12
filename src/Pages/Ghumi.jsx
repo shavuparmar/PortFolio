@@ -12,7 +12,9 @@ export default function Ghumi() {
         2000, // Waits 2s
         'Graphics Designer', // Types 'Three' without deleting 'Two'
         2000,
-        'App-Developer',
+        'Music Composer',
+        2000,
+        'Music Producer',
         2000,
         () => {
         

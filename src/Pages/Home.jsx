@@ -4,8 +4,8 @@ import Header from '../Common/Header'
 import DemoImage from './Images/image.png'
 import Figma from "../Images/figma.png"
 import Ghumi from './Ghumi'
-import Skill from "../Images/Skill.png"
-
+import Skill from "../Images/All-Skill.png"
+import LinkeDin from "../Images/Linkedin.png"
 import Photoshop from "../Images/photoshop.png"
 import Github from "../Images/Github.png"
 import ReactJs from "../Images/React-Js.png"
@@ -13,6 +13,8 @@ import Html from "../Images/Html.png"
 import Css from "../Images/Css.png"
 import JavaScriptIcon from "../Images/JavaScriptIcon.png"
 import Nodejs from "../Images/nodejs.png"
+import Snapchat from "../Images/Snapchat.png"
+import Instagram from "../Images/Instagram.png"
 
 
 
@@ -29,8 +31,8 @@ export default function Home() {
             <h1>ShavuParmar</h1>
             <h6> <Ghumi /> </h6>
             <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, tenetur incidunt aliquid sunt et illo dignissimos, id eveniet ab possimus nam unde eligendi. Nam, fugit perferendis quidem dolores debitis ipsa accusamus ipsum? Mollitia quo facere nisi maxime quidem, quisquam aliquid? </p>
-            <a href="Resume.pdf" download={Figma}> <button className='ButtonDesign'
-            >CV</button></a>
+            <button className='ButtonDesign'
+            >CV</button>
             <button className='ButtonDesign' type='Download' onClick={() => {
               alert("hello Sir Thise is Under process Please try again afert Some time")
             }}>Resume</button>
@@ -41,19 +43,20 @@ export default function Home() {
         </div>
       </div>
       <div className="AnimationSection">
+        <h1>Connect With Me in</h1>
         <div className='Run'>
           <div className='Animation' >
             <div className='SideAni' onClick={() => { window.location.href = "https://www.instagram.com/shavuparmar" }} >
-              <img src={Figma} alt='Figma'></img>
+              <img src={LinkeDin} alt='Figma'></img>
               <div>
-                <h1>Shavu Parmar</h1>
+                <h1>ShavuParmar</h1>
               </div>
             </div>
           </div>
           <div className='Animation'>
             <div className='SideAni'>
-              <img src={Figma} alt='Figma'></img>
-              <h1>Saurabh Parmar</h1>
+              <img src={Github} alt='Figma'></img>
+              <h1>ShavuParmar</h1>
             </div>
           </div>
           <div className='Animation'>
@@ -62,18 +65,38 @@ export default function Home() {
               <h1>Shubham Parmar</h1>
             </div>
           </div>
+          <div className='Animation'>
+            <div className='SideAni'>
+              <img src={Figma} alt='Figma'></img>
+              <h1>@ShavuParmar</h1>
+            </div>
+          </div>
+          <div className='Animation'>
+            <div className='SideAni'>
+              <img src={Snapchat} alt='Figma'></img>
+              <h1>ParmarShavu</h1>
+
+            </div>
+          </div>
+          <div className='Animation'>
+            <div className='SideAni'>
+              <img src={Instagram} alt='Figma'></img>
+              <h1>ShavuParMar</h1>
+              <h3>Deactivate</h3>
+            </div>
+          </div>
         </div>
       </div>
-
-
-      <div className="Skill-Section">
+      <div className="Skill-">
         <div className="Skill-Details">
           <div className="About-Skill">
             <div className="Skill-Image">
               <img src={Skill} alt="" />
             </div>
-            <div className="Skill-Heading ">
-              <h1>Skill</h1>
+            <div className="Skill-Section ">
+              <div className="SkillHeading">
+                <h1>Skill</h1>
+              </div>
               <div className="Skill-Grid">
                 <div className="Skill-Border ">
                   <div className="Skill-icon">
