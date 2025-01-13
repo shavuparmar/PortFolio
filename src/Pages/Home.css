@@ -63,7 +63,7 @@
     width: 22rem;
     margin-left: 10px;
     display: flex;
-    animation: Animation 25s linear infinite reverse;
+    animation: Animation 30s linear infinite reverse;
     align-items: center;
     box-shadow: 10px 4px 10px 1px;
     margin-bottom: 1.5rem;
@@ -182,11 +182,11 @@ h1 {
 
 @keyframes Animation {
     0% {
-        margin-left: -500%;
+        margin-left: -600%;
     }
 
     100% {
-        margin-left: 500%;
+        margin-left: 600%;
     }
 }
 

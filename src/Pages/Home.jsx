@@ -36,6 +36,7 @@ export default function Home() {
             <button className='ButtonDesign' type='Download' onClick={() => {
               alert("hello Sir Thise is Under process Please try again afert Some time")
             }}>Resume</button>
+            <button onClick={()=>{window.location.href="https://t.me/shavuparmar"}} className='ButtonDesign'>Telegram</button>
           </div>
           <div className="ImageSection">
             <img src={DemoImage} alt="SaurabhParmar" />
@@ -46,15 +47,15 @@ export default function Home() {
         <h1>Connect With Me in</h1>
         <div className='Run'>
           <div className='Animation' >
-            <div className='SideAni' onClick={() => { window.location.href = "https://www.instagram.com/shavuparmar" }} >
+            <div className='SideAni' onClick={() => { window.location.href = "https://www.linkedin.com/in/shavuparmar?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" }} >
               <img src={LinkeDin} alt='Figma'></img>
               <div>
                 <h1>ShavuParmar</h1>
               </div>
             </div>
           </div>
-          <div className='Animation'>
-            <div className='SideAni'>
+          <div className='Animation'  >
+            <div className='SideAni' >
               <img src={Github} alt='Figma'></img>
               <h1>ShavuParmar</h1>
             </div>
@@ -63,12 +64,6 @@ export default function Home() {
             <div className='SideAni'>
               <img src={Figma} alt='Figma'></img>
               <h1>Shubham Parmar</h1>
-            </div>
-          </div>
-          <div className='Animation'>
-            <div className='SideAni'>
-              <img src={Figma} alt='Figma'></img>
-              <h1>@ShavuParmar</h1>
             </div>
           </div>
           <div className='Animation'>
@@ -82,7 +77,7 @@ export default function Home() {
             <div className='SideAni'>
               <img src={Instagram} alt='Figma'></img>
               <h1>ShavuParMar</h1>
-              <h3>Deactivate</h3>
+
             </div>
           </div>
         </div>
