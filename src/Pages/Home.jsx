@@ -19,8 +19,7 @@ import Instagram from "../Images/Instagram.png"
 
 
 export default function Home() {
-
-
+ 
   return (
     <div className='Main-Section'>
       <Header />
@@ -28,15 +27,18 @@ export default function Home() {
       <div className="Container">
         <div className="HeroSection">
           <div className="textBox">
-            <h1>ShavuParmar</h1>
+            <h1>Shavu Parmar</h1>
             <h6> <Ghumi /> </h6>
-            <p> Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, tenetur incidunt aliquid sunt et illo dignissimos, id eveniet ab possimus nam unde eligendi. Nam, fugit perferendis quidem dolores debitis ipsa accusamus ipsum? Mollitia quo facere nisi maxime quidem, quisquam aliquid? </p>
-            <button className='ButtonDesign'
+            <p> Hello! I'm ShavuParmar, a passionate Web Developer, Graphic Designer, and UI/UX Designer dedicated to creating visually stunning, user-friendly, and impactful digital experiences. </p>
+            <p> I specialize in blending creativity with technical precision to build responsive websites, captivating graphics, and seamless user interfaces. Whether crafting a unique brand identity, coding pixel-perfect websites, or designing intuitive app interfaces, my goal is to help ideas come to life in a way that resonates with users.</p>
+            <button className='ButtonDesign' onClick={() => {
+              alert("There is No file in Server! Please try agian after some time")
+            }}
             >CV</button>
             <button className='ButtonDesign' type='Download' onClick={() => {
-              alert("hello Sir Thise is Under process Please try again afert Some time")
+              alert("There is No file in Server! Please try agian after some time")
             }}>Resume</button>
-            <button onClick={()=>{window.location.href="https://t.me/shavuparmar"}} className='ButtonDesign'>Telegram</button>
+            <button onClick={() => { window.location.href = "https://t.me/shavuparmar" }} className='ButtonDesign'>Telegram</button>
           </div>
           <div className="ImageSection">
             <img src={DemoImage} alt="SaurabhParmar" />
@@ -47,39 +49,52 @@ export default function Home() {
         <h1>Connect With Me in</h1>
         <div className='Run'>
           <div className='Animation' >
-            <div className='SideAni' onClick={() => { window.location.href = "https://www.linkedin.com/in/shavuparmar?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" }} >
+            <div className='SideAni' >
               <img src={LinkeDin} alt='Figma'></img>
               <div>
                 <h1>ShavuParmar</h1>
+                <button className='SocialBtn-Design' onClick={() => { window.location.href = "https://www.linkedin.com/in/shavuparmar?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" }}>Follow</button>
               </div>
             </div>
           </div>
-          <div className='Animation'  >
+          <div className='Animation' >
+            <div className='SideAni' >
+              <img src={Instagram} alt='Figma'></img>
+              <div className='SocialBtn'>
+                <h1>ShavuParmar</h1>
+                <button className='SocialBtn-Design' onClick={() => { window.location.href = "https://www.instagram.com/shavuparmar/" }}>Follow</button>
+              </div>
+            </div>
+          </div>
+          <div className='Animation' >
             <div className='SideAni' >
               <img src={Github} alt='Figma'></img>
-              <h1>ShavuParmar</h1>
+              <div>
+                <h1>ShavuParmar</h1>
+                <button className='SocialBtn-Design' onClick={() => { window.location.href = "https://github.com/shavuparmar" }}>Follow</button>
+              </div>
             </div>
           </div>
-          <div className='Animation'>
-            <div className='SideAni'>
-              <img src={Figma} alt='Figma'></img>
-              <h1>Shubham Parmar</h1>
-            </div>
-          </div>
-          <div className='Animation'>
-            <div className='SideAni'>
+          <div className='Animation' >
+            <div className='SideAni' >
               <img src={Snapchat} alt='Figma'></img>
-              <h1>ParmarShavu</h1>
-
+              <div>
+                <h1>Parmarshavu</h1>
+                <button className='SocialBtn-Design' onClick={() => { window.location.href = "https://www.snapchat.com/add/parmarshavu" }}>Follow</button>
+              </div>
             </div>
           </div>
-          <div className='Animation'>
-            <div className='SideAni'>
-              <img src={Instagram} alt='Figma'></img>
-              <h1>ShavuParMar</h1>
-
+          <div className='Animation' >
+            <div className='SideAni' >
+              <img src={Figma} alt='Figma'></img>
+              <div>
+                <h1>ShavuParmar</h1>
+                <button className='SocialBtn-Design' onClick={() => { window.location.href = "https://www.figma.com/@shavuparmar" }}>Follow</button>
+              </div>
             </div>
           </div>
+
+
         </div>
       </div>
       <div className="Skill-">
@@ -98,7 +113,7 @@ export default function Home() {
                     <img src={Photoshop} alt="" />
                   </div>
                   <div className="Skill-text">
-                    <h1>Snapchat</h1>
+                    <h1>Photoshop</h1>
                   </div>
                 </div>
                 <div className="Skill-Border ">
@@ -106,7 +121,7 @@ export default function Home() {
                     <img src={Figma} alt="" />
                   </div>
                   <div className="Skill-text">
-                    <h1>Snapchat</h1>
+                    <h1>Figma</h1>
                   </div>
                 </div>
                 <div className="Skill-Border ">
@@ -114,7 +129,7 @@ export default function Home() {
                     <img src={Html} alt="" />
                   </div>
                   <div className="Skill-text">
-                    <h1>Snapchat</h1>
+                    <h1>Html</h1>
                   </div>
                 </div>
                 <div className="Skill-Border ">
@@ -122,7 +137,7 @@ export default function Home() {
                     <img src={Css} alt="" />
                   </div>
                   <div className="Skill-text">
-                    <h1>Snapchat</h1>
+                    <h1>Css</h1>
                   </div>
                 </div>
                 <div className="Skill-Border ">
@@ -130,7 +145,7 @@ export default function Home() {
                     <img src={Nodejs} alt="" />
                   </div>
                   <div className="Skill-text">
-                    <h1>Snapchat</h1>
+                    <h1>NodeJs</h1>
                   </div>
                 </div>
                 <div className="Skill-Border ">
@@ -138,7 +153,7 @@ export default function Home() {
                     <img src={ReactJs} alt="" />
                   </div>
                   <div className="Skill-text">
-                    <h1>Snapchat</h1>
+                    <h1>ReactJs</h1>
                   </div>
                 </div>
                 <div className="Skill-Border ">
@@ -146,7 +161,7 @@ export default function Home() {
                     <img src={Github} alt="" />
                   </div>
                   <div className="Skill-text">
-                    <h1>Snapchat</h1>
+                    <h1>Git</h1>
                   </div>
                 </div>
                 <div className="Skill-Border ">
@@ -154,7 +169,7 @@ export default function Home() {
                     <img src={JavaScriptIcon} alt="" />
                   </div>
                   <div className="Skill-text">
-                    <h1>Snapchat</h1>
+                    <h1>JavaScript</h1>
                   </div>
                 </div>
               </div>
