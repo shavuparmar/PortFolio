@@ -212,7 +212,7 @@ export default function Portfolio() {
           <img
             src={heroImage}
             alt="Shavu Parmar"
-            className="
+            className=" -mt-25
     w-full           /* Full width of container on small screens */
     max-w-xs         /* Max width on smallest screens */
     sm:max-w-sm      /* Slightly bigger on small screens */
