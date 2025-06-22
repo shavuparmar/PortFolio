@@ -114,7 +114,7 @@ export default function Portfolio() {
       {/* Hero */}
       <section
         id="home"
-        className="min-h-screen flex flex-col-reverse md:flex-row items-center justify-center max-w-7xl mx-auto px-6 md:px-12 pt-32 md:pt-40 pb-16"
+        className="min-h-full mb-50 flex flex-col-reverse md:flex-row items-center justify-center max-w-7xl mx-auto px-6 md:px-12 pt-32 md:pt-40 pb-16"
       >
         <div
           className="md:w-1/2 text-center  md:text-left space-y-6"
@@ -234,7 +234,7 @@ export default function Portfolio() {
       {/* About */}
       <section
         id="about"
-        className="max-w-4xl mx-auto px-6 py-20 -mt-35 text-center md:text-left"
+        className="max-w-6xl  mx-auto px-6 py-20 -mt-35 text-center md:text-left"
         data-aos="fade-up"
       >
         <h2 className="text-4xl font-bold mb-8 text-blue-400">About Me</h2>
