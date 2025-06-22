@@ -304,23 +304,26 @@ export default function Portfolio() {
               Tools: "React + Tailwindcss",
               link: "https://github.com/shavuparmar/dev-hubs",
             },
-
           ].map(({ title, description, link, Tools }, i) => (
-            <a
-              href={link}
+            <div
               key={i}
-              target="_blank"
-              rel="noreferrer"
-              className="bg-gray-800 rounded-lg p-6  shadow-lg transform hover:scale-105 hover:shadow-gray-500 transition-shadow duration-300 transition-transform duration-300 border  hover:border-blue-500"
+              className="bg-gray-800 rounded-lg p-6 shadow-lg transform hover:scale-105 hover:shadow-gray-500 transition-shadow duration-300 transition-transform duration-300 border hover:border-blue-500"
               data-aos="zoom-in"
             >
               <h3 className="text-2xl font-semibold mb-3 text-blue-300">{title}</h3>
               <p className="text-gray-400 mb-5">{description}</p>
-              <p className="bg-gray-700 bg-gray-800 w-full rounded-xl py-2 px-4 cursor-default shadow-md hover:shadow-gray-500 transition-shadow duration-300 text-lg font-semibold text-blue-300 select-none">   {Tools}</p>
-              <p className="mt-4 text-blue-400 underline font-medium">
-                View Project
+              <p className="bg-gray-800 w-full rounded-xl py-2 px-4 cursor-default shadow-md hover:shadow-gray-500 transition-shadow duration-300 text-lg font-semibold text-blue-300 select-none">
+                {Tools}
               </p>
-            </a>
+
+              {/* Redirect Button */}
+              <button
+                onClick={() => window.location.href = link}
+                className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2  cursor-pointer px-6 rounded transition-colors rounded-xl duration-300"
+              >
+                Visit
+              </button>
+            </div>
           ))}
         </div>
       </section>
