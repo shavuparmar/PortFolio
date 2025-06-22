@@ -234,7 +234,7 @@ export default function Portfolio() {
       {/* About */}
       <section
         id="about"
-        className="max-w-6xl  mx-auto px-6 py-20 -mt-35 text-center md:text-left"
+        className="max-w-6xl  mx-auto px-6 py-20 -mt-80 text-center md:text-left"
         data-aos="fade-up"
       >
         <h2 className="text-4xl font-bold mb-8 text-blue-400">About Me</h2>
@@ -291,7 +291,7 @@ export default function Portfolio() {
       {/* Projects */}
       <section
         id="projects"
-        className="max-w-7xl mx-auto px-6 py-20"
+        className="max-w-7xl mx-auto -mt-30 px-6 py-20"
         data-aos="fade-up"
       >
         <h2 className="text-4xl font-bold mb-12 text-center text-blue-400">Projects</h2>
@@ -328,7 +328,7 @@ export default function Portfolio() {
       {/* Skills */}
       <section
         id="skills"
-        className="max-w-6xl mx-auto px-6 py-20"
+        className="max-w-6xl mx-auto -mt-30 px-6 py-20"
         data-aos="fade-up"
       >
         <h2 className="text-4xl font-bold mb-12 text-center text-blue-400">Skills</h2>
@@ -362,7 +362,7 @@ export default function Portfolio() {
       {/* Contact */}
       <section
         id="contact"
-        className="max-w-4xl mx-auto -mt-10 px-6 py-20"
+        className="max-w-4xl mx-auto -mt-30 px-6 py-20"
         data-aos="fade-up"
       >
         <h2 className="text-4xl font-bold mb-8 text-center text-blue-400">Contact Me</h2>
