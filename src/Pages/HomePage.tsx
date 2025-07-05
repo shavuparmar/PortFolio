@@ -167,7 +167,7 @@ export default function Portfolio() {
               <FaLinkedin />
             </a>
             <a
-              href="https://t.me/shavuparmar"
+              href="https://t.me/parmarshavu"
               target="_blank"
               rel="noreferrer"
               aria-label="Telegram"

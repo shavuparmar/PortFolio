@@ -17,5 +17,5 @@ const AllRoutes = createBrowserRouter([
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <RouterProvider router={AllRoutes}></RouterProvider>
-  </StrictMode>,
+  </StrictMode>
 )
