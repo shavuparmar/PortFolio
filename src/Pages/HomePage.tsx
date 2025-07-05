@@ -6,6 +6,7 @@ import "aos/dist/aos.css";
 import { BiCoffee } from "react-icons/bi";
 import { BsSnapchat } from "react-icons/bs";
 import { FiFigma } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const titles = ["Web Developer", "Graphics Designer", "UI/UX Designer"];
 
@@ -42,27 +43,9 @@ export default function Portfolio() {
   }, [typingIndex, typingForward, titleIndex]);
 
   // Handle form state
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [formStatus, setFormStatus] = useState("");
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (formData.name && formData.email && formData.message) {
-      setFormStatus("Sending...");
-      setTimeout(() => {
-        setFormStatus("Message sent! Thank you.");
-        setFormData({ name: "", email: "", message: "" });
-      }, 1500);
-    } else {
-      setFormStatus("Please fill all fields.");
-    }
-  };
+
   return (
     <div className=" text-gray-200 min-h-screen font-sans">
       {/* Header */}
@@ -369,53 +352,11 @@ export default function Portfolio() {
         data-aos="fade-up"
       >
         <h2 className="text-4xl font-bold mb-8 text-center text-blue-400">Contact Me</h2>
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col max-w-xl mx-auto space-y-6"
-          noValidate
-        >
-          <input
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            value={formData.name}
-            onChange={handleChange}
-            className="rounded-md px-4 py-3 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Your Email"
-            value={formData.email}
-            onChange={handleChange}
-            className="rounded-md px-4 py-3 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-          <textarea
-            name="message"
-            placeholder="Your Message"
-            rows={5}
-            value={formData.message}
-            onChange={handleChange}
-            className="rounded-md px-4 py-3 bg-gray-800 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
-            required
-          />
-          <button
-            type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-md transition-colors"
-          >
-            Send Message
-          </button>
-          {formStatus && (
-            <p
-              className={`text-center mt-3 ${formStatus.includes("sent") ? "text-green-400" : "text-red-400"
-                }`}
-            >
-              {formStatus}
-            </p>
-          )}
-        </form>
+       <div className="text-center">
+         
+            <Link to={"/forum"} className="bg-gray-800 rounded-xl py-3 px-4 cursor-default shadow-md hover:shadow-slate-500 transition-shadow duration-300 text-lg font-semibold text-blue-300 cursor-pointer"> Contact Me</Link>
+          
+       </div>
       </section>
 
       {/* Footer */}
