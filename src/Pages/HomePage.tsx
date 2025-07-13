@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import heroImage from "../assets/prodev.png"; // Replace with your image path
+// import heroImage from "../assets/prodev.png"; // Replace with your image path
+import heroImage from "../assets/Monster.gif"; // Replace with your image path
 import { FaGithub, FaLinkedin, FaTelegramPlane, FaEnvelope } from "react-icons/fa";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -195,19 +196,20 @@ export default function Portfolio() {
           <img
             src={heroImage}
             alt="Shavu Parmar"
-            className=" -mt-25
-    w-full           /* Full width of container on small screens */
-    max-w-xs         /* Max width on smallest screens */
-    sm:max-w-sm      /* Slightly bigger on small screens */
-    md:max-w-md      /* Medium screens */
-    lg:max-w-lg      /* Larger screens */
-    xl:max-w-xl      /* Extra large screens */
-    2xl:max-w-2xl    /* Very large screens */
-    h-auto           /* Keep aspect ratio */
-    rounded-xl
-    transition-transform duration-300 ease-in-out
-    hover:scale-110
-    mx-auto          /* Center horizontally */
+            className="
+        w-full
+        max-w-xs
+        sm:max-w-sm
+        md:max-w-md
+        lg:max-w-lg
+        xl:max-w-xl
+        2xl:max-w-2xl
+        h-auto
+        rounded-xl
+        transition-transform duration-300 ease-in-out
+        hover:scale-110
+        mx-auto
+        
   "
           />
 
@@ -352,11 +354,11 @@ export default function Portfolio() {
         data-aos="fade-up"
       >
         <h2 className="text-4xl font-bold mb-8 text-center text-blue-400">Contact Me</h2>
-       <div className="text-center">
-         
-            <Link to={"/forum"} className="bg-gray-800 rounded-xl py-3 px-4 cursor-default shadow-md hover:shadow-slate-500 transition-shadow duration-300 text-lg font-semibold text-blue-300 cursor-pointer"> Contact Me</Link>
-          
-       </div>
+        <div className="text-center">
+
+          <Link to={"/forum"} className="bg-gray-800 rounded-xl py-3 px-4 cursor-default shadow-md hover:shadow-slate-500 transition-shadow duration-300 text-lg font-semibold text-blue-300 cursor-pointer"> Contact Me</Link>
+
+        </div>
       </section>
 
       {/* Footer */}
