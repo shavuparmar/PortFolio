@@ -8,6 +8,7 @@ import { BiCoffee } from "react-icons/bi";
 import { BsSnapchat } from "react-icons/bs";
 import { FiFigma } from "react-icons/fi";
 import { Link } from "react-router-dom";
+ 
 
 const titles = ["Web Developer", "Graphics Designer", "UI/UX Designer"];
 
@@ -43,7 +44,7 @@ export default function Portfolio() {
     return () => clearTimeout(timeout);
   }, [typingIndex, typingForward, titleIndex]);
 
-  // Handle form state
+
 
 
 
@@ -53,6 +54,7 @@ export default function Portfolio() {
       <header className="fixed w-full bg-gray-900 bg-opacity-95 backdrop-blur-md z-50 shadow-lg">
         <div className="max-w-7xl mx-auto flex justify-between items-center p-5">
           <div className="text-3xl font-bold cursor-pointer select-none">Shavu Parmar</div>
+          
           <nav className="hidden md:flex space-x-8 text-lg font-medium">
             {["Home", "About", "Projects", "Skills", "Contact"].map((item) => (
               <a

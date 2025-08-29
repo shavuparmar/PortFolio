@@ -7,16 +7,21 @@ import ContactForm from './Pages/ContactForm'
 
 
 
+
+
+
 const AllRoutes = createBrowserRouter([
   {
-    path:"/",
-    element:<HomePage/>
+    path: "/",
+    element: <HomePage />
   },
   {
-    path:"forum",
-    element:<ContactForm/>,
-   
+    path: "forum",
+    element: <ContactForm />,
   }
+ 
+ 
+
 ])
 
 
