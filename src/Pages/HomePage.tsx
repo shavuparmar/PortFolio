@@ -8,6 +8,7 @@ import { BiCoffee } from "react-icons/bi";
 import { BsSnapchat } from "react-icons/bs";
 import { FiFigma } from "react-icons/fi";
 import { Link } from "react-router-dom";
+
  
 
 const titles = ["Web Developer", "Graphics Designer", "UI/UX Designer"];
@@ -56,7 +57,7 @@ export default function Portfolio() {
           <div className="text-3xl font-bold cursor-pointer select-none">Shavu Parmar</div>
           
           <nav className="hidden md:flex space-x-8 text-lg font-medium">
-            {["Home", "About", "Projects", "Skills", "Contact"].map((item) => (
+            {["Home", "About", "Projects", "Skills", "Contact",].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}
@@ -81,7 +82,7 @@ export default function Portfolio() {
         {menuOpen && (
           <nav className="md:hidden bg-gray-800 bg-opacity-95 backdrop-blur-md shadow-inner">
             <ul className="flex flex-col space-y-4 p-6 text-xl font-semibold">
-              {["Home", "About", "Projects", "Skills", "Contact"].map((item) => (
+              {["Home", "About", "Projects", "Skills", "Contact",].map((item) => (
                 <li key={item}>
                   <a
                     href={`#${item.toLowerCase()}`}
@@ -348,6 +349,67 @@ export default function Portfolio() {
           ))}
         </div>
       </section>
+
+{/* Snapchat Camera Lens Section*/}
+<section
+        id="Lens"
+        className="max-w-7xl mx-auto -mt-30 px-6 py-20"
+        data-aos="fade-up"
+      >
+      
+         <h2 className="text-4xl font-bold mb-12 text-center  text-blue-400"> Snapchat Filter's</h2>
+        
+          
+        <div className="grid gap-10 md:grid-cols-3  ">
+          {[
+            {
+              title: "BeardBoss Vibes",
+              description:
+                "A Filter for Snapchat that show a beard in face ",
+              Tools: "Create with Snapchat Lens Studio",
+              link: "https://snapchat.com/add/imshavuparmar",
+            },
+            {
+              title: "SmoothAura",
+              description:
+                "A Filter for Snapchat that show a beard in face ",
+              Tools: "Create with Snapchat Lens Studio",
+              link: "https://snapchat.com/add/imshavuparmar",
+            },
+            {
+              title: "CleanFace",
+              description:
+                "A Filter for Snapchat that show a beard in face ",
+              Tools: "Create with Snapchat Lens Studio",
+              link: "https://snapchat.com/add/imshavuparmar",
+            },
+          ].map(({ title, description, link, Tools }, i) => (
+            <div
+              key={i}
+              className="bg-yellow-300 rounded-2xl p-6 shadow-lg transform hover:scale-105 hover:shadow-gray-500 transition-shadow duration-300 transition-transform duration-300 border hover:border-yellow-900"
+              data-aos="zoom-in"
+            >
+              <h3 className="text-2xl font-semibold mb-3 text-black">{title}</h3>
+              <p className="text-gray-900 mb-5">{description}</p>
+              <p className="bg-gray-800 w-full rounded-xl py-2 px-4 cursor-default shadow-md hover:shadow-gray-500 transition-shadow duration-300 text-lg font-semibold text-blue-300 select-none">
+                {Tools}
+              </p>
+
+              {/* Redirect Button */}
+              <button
+                onClick={() => window.location.href = link}
+                className="mt-4 bg-blue-900 hover:bg-blue-600 text-white font-medium py-2  cursor-pointer px-6 rounded transition-colors rounded-xl duration-300"
+              >
+                Create a snap with filter
+              </button>
+            </div>
+          ))}
+        </div>
+      </section>
+
+
+
+
 
       {/* Contact */}
       <section
