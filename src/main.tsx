@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import HomePage from './Pages/HomePage'
 import ContactForm from './Pages/ContactForm'
 import AboutPage from './Pages/AboutPage'
+import Certicard from "./Pages/Certicard"
 
 
 
@@ -23,6 +24,10 @@ const AllRoutes = createBrowserRouter([
   {
    path:"about",
    element:<AboutPage/>
+  },
+  {
+    path:"certificate",
+    element:<Certicard/>
   }
  
  
