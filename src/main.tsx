@@ -4,6 +4,7 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import HomePage from './Pages/HomePage'
 import ContactForm from './Pages/ContactForm'
+import AboutPage from './Pages/AboutPage'
 
 
 
@@ -18,6 +19,10 @@ const AllRoutes = createBrowserRouter([
   {
     path: "forum",
     element: <ContactForm />,
+  },
+  {
+   path:"about",
+   element:<AboutPage/>
   }
  
  

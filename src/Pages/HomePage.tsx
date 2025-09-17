@@ -7,7 +7,7 @@ import "aos/dist/aos.css";
 import { BiCoffee } from "react-icons/bi";
 import { BsSnapchat } from "react-icons/bs";
 import { FiFigma } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import {  Link } from "react-router-dom";
 
  
 
@@ -191,7 +191,7 @@ export default function Portfolio() {
             </a>
           </div>
 
-        </div>
+        </div> 
         <div
           className="md:w-1/2 flex justify-center"
           data-aos="fade-left"
@@ -241,6 +241,9 @@ export default function Portfolio() {
           </span>
           <span className="block mb-4">
             From brainstorming innovative UI/UX concepts to deploying fully functional web platforms, I'm hands-on at every step. Whether it's a personal passion project or a team collaboration, I bring energy, curiosity, and a design-first mindset to the table.
+          </span>
+          <span className="block mb-4">
+          <a href="/about" className="cursor-pointer text-white hover:text-slate-500" >More About Me</a>
           </span>
 
           <span className="block mb-2 font-semibold text-blue-300">🛠️ What I Work With</span>
@@ -372,14 +375,14 @@ export default function Portfolio() {
             {
               title: "SmoothAura",
               description:
-                "A Filter for Snapchat that show a beard in face ",
+                "A Filter for Snapchat that clean face & Show a UserName in top of left side ",
               Tools: "Create with Snapchat Lens Studio",
               link: "https://snapchat.com/add/imshavuparmar",
             },
             {
               title: "CleanFace",
               description:
-                "A Filter for Snapchat that show a beard in face ",
+                "A Filter for Snapchat that clean face & just a simple filter ",
               Tools: "Create with Snapchat Lens Studio",
               link: "https://snapchat.com/add/imshavuparmar",
             },
