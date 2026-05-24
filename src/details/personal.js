@@ -9,7 +9,7 @@ const personal = {
   location: "Gujarat, India",
   resumeLink: "#",
   heroStats: [
-    { label: "Projects", value: "15+" },
+    { label: "Projects", value: "20+" },
     { label: "Tech Stack", value: "10+" },
     { label: "Learning", value: "Daily" },
   ],
