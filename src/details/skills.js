@@ -15,30 +15,7 @@ const skills = [
     category: "Other",
     items: ["Responsive Design", "UI/UX", "AI API Integration", "Project Structuring"],
   },
-  {
-    category: "Other",
-    items: ["Responsive Design", "UI/UX", "AI API Integration", "Project Structuring"],
-  },
-  {
-    category: "Other",
-    items: ["Responsive Design", "UI/UX", "AI API Integration", "Project Structuring"],
-  },
-  {
-    category: "Other",
-    items: ["Responsive Design", "UI/UX", "AI API Integration", "Project Structuring"],
-  },
-  {
-    category: "Other",
-    items: ["Responsive Design", "UI/UX", "AI API Integration", "Project Structuring"],
-  },
-  {
-    category: "Other",
-    items: ["Responsive Design", "UI/UX", "AI API Integration", "Project Structuring"],
-  },
-  {
-    category: "Other",
-    items: ["Responsive Design", "UI/UX", "AI API Integration", "Project Structuring"],
-  },
+  
 ];
 
 export default skills;

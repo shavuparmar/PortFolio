@@ -29,7 +29,7 @@ import about from "../details/about";
 import skills from "../details/skills";
 import projects from "../details/projects";
 import services from "../details/services";
-import experience from "../details/experience";
+import journy from "../details/journy";
 import social from "../details/social";
 
 function CustomCursor() {
@@ -574,7 +574,9 @@ export default function HomeScreen() {
                     transition={{ duration: 0.8, delay: index * 0.15 }}
                     className="rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl"
                   >
-                    <h3 className="text-2xl font-bold text-white">{item.value}</h3>
+                    <h3 className="text-2xl font-bold text-white">
+                      {item.value}
+                    </h3>
                     <p className="mt-2 text-sm text-zinc-400">{item.label}</p>
                   </motion.div>
                 ))}
@@ -592,7 +594,9 @@ export default function HomeScreen() {
                 <div className="relative rounded-[2rem] border border-white/10 bg-white/5 p-8 backdrop-blur-2xl">
                   <div className="grid gap-5">
                     <div className="rounded-3xl border border-white/10 bg-black/20 p-6">
-                      <p className="text-sm text-violet-300">Developer Profile</p>
+                      <p className="text-sm text-violet-300">
+                        Developer Profile
+                      </p>
                       <h3 className="mt-2 text-2xl font-bold text-white">
                         {personal.brand}
                       </h3>
@@ -683,7 +687,7 @@ export default function HomeScreen() {
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {skills.map((group, index) => (
               <motion.div
-                key={group.category}
+                key={`${group.category}-${index}`}
                 initial={{ opacity: 0, y: 35 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -728,7 +732,9 @@ export default function HomeScreen() {
               >
                 <div className="mb-4 flex items-start justify-between gap-4">
                   <div>
-                    <p className="text-sm text-violet-300">{project.subtitle}</p>
+                    <p className="text-sm text-violet-300">
+                      {project.subtitle}
+                    </p>
                     <h3 className="mt-2 text-2xl font-bold text-white">
                       {project.title}
                     </h3>
@@ -764,6 +770,7 @@ export default function HomeScreen() {
                   </a>
                   <a
                     href={project.live}
+                    target="_blank"
                     className="inline-flex items-center gap-2 text-zinc-300 transition hover:text-white"
                   >
                     <ExternalLink size={18} />
@@ -803,15 +810,15 @@ export default function HomeScreen() {
           </div>
         </section>
 
-        <section id="experience" className="mx-auto max-w-7xl px-6 py-24">
+        <section id="journy" className="mx-auto max-w-7xl px-6 py-24">
           <SectionTitle
-            badge="Experience"
+            badge="journy"
             title="My Journey"
             subtitle="A quick look at my practical work and growth in development."
           />
 
           <div className="relative space-y-6 border-l border-white/10 pl-6">
-            {experience.map((item, index) => (
+            {journy.map((item, index) => (
               <motion.div
                 key={`${item.year}-${item.title}`}
                 initial={{ opacity: 0, x: 35 }}
@@ -823,7 +830,39 @@ export default function HomeScreen() {
                 <span className="mb-2 block text-sm font-medium text-violet-300">
                   {item.year}
                 </span>
-                <h3 className="text-xl font-semibold text-white">{item.title}</h3>
+                <h3 className="text-xl font-semibold text-white">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-sm leading-7 text-zinc-400">
+                  {item.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+        <section id="journy" className="mx-auto max-w-7xl px-6 py-24">
+          <SectionTitle
+            badge="journy"
+            title="My Journey"
+            subtitle="A quick look at my practical work and growth in development."
+          />
+
+          <div className="relative space-y-6 border-l border-white/10 pl-6">
+            {journy.map((item, index) => (
+              <motion.div
+                key={`${item.year}-${item.title}`}
+                initial={{ opacity: 0, x: 35 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55, delay: index * 0.08 }}
+                className="relative rounded-[2rem] border border-white/10 bg-white/5 p-6 backdrop-blur-xl"
+              >
+                <span className="mb-2 block text-sm font-medium text-violet-300">
+                  {item.year}
+                </span>
+                <h3 className="text-xl font-semibold text-white">
+                  {item.title}
+                </h3>
                 <p className="mt-3 text-sm leading-7 text-zinc-400">
                   {item.description}
                 </p>

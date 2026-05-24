@@ -1,8 +1,8 @@
 const social = [
-  { name: "GitHub", link: "#" },
-  { name: "LinkedIn", link: "#" },
-  { name: "Instagram", link: "#" },
-  { name: "Email", link: "mailto:parmarshavu009@gmail.com" },
+  { name: "GitHub", link: "https://github.com/shavuparmar" },
+  { name: "LinkedIn", link: "https://https://www.linkedin.com/in/shavuparmar" },
+  { name: "Instagram", link: "https://instagram.com/shavuparmar" },
+  { name: "Email", link: "mailto:work.shubhamparmar@gmail.com" },
 ];
 
 export default social;

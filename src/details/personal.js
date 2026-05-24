@@ -5,7 +5,7 @@ const personal = {
   shortIntro:
     "I build modern web apps, responsive interfaces, private software systems, and AI-powered products with premium design and practical functionality.",
   email: "parmarshavu009@gmail.com",
-  phone: "+91 63522****21",
+  phone: "+91 6352244221",
   location: "Gujarat, India",
   resumeLink: "#",
   heroStats: [
