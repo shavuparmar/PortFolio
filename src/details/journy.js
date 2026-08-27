@@ -1,8 +1,8 @@
 const journy = [
   {
     year: "2023 - Present",
-    title: "P P Savani Univericity",
-    description: "i pursing P P savani",
+    title: "P P Savani University",
+    description: "Pursuing advanced studies in software engineering, focusing on modern web development, scalable systems, and practical applications.",
   },
   {
     year: "2018 - 2022",

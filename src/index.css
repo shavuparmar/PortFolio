@@ -1,33 +1,73 @@
 @import "tailwindcss";
-html {
-  scroll-behavior: smooth;
+
+@theme {
+  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-body {
-  margin: 0;
-  font-family: Inter, system-ui, sans-serif;
-  background: #050816;
-  color: white;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Enforce default cursor globally */
+    cursor: auto !important;
+  }
+  
+  body {
+    @apply bg-[#050505] text-[#F4F4F5] font-sans antialiased selection:bg-[#F4F4F5] selection:text-[#050505];
+    cursor: auto !important;
+  }
+
+  /* Force default cursors */
+  * {
+    cursor: auto;
+  }
+  
+  a, button, [role="button"], input[type="submit"], select, .cursor-pointer {
+    cursor: pointer !important;
+  }
 }
 
-* {
-  box-sizing: border-box;
-}
-
+/* Minimal Premium Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0a0a0a;
+  @apply bg-transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #7c3aed, #06b6d4);
-  border-radius: 999px;
+  @apply bg-[#333333] rounded-full;
 }
-@media (min-width: 1024px) {
-  body {
-    cursor: none;
-  }
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-[#555555];
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #333333 transparent;
+}
+
+/* Infinite Marquee */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+.animate-marquee-reverse {
+  animation: marquee-reverse 20s linear infinite;
+}
+
+.animate-marquee:hover, .animate-marquee-reverse:hover {
+  animation-play-state: paused;
 }

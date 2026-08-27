@@ -7,7 +7,7 @@ const personal = {
   email: "parmarshavu009@gmail.com",
   phone: "+91 6352244221",
   location: "Gujarat, India",
-  resumeLink: "#",
+  resumeLink: "/ParmarSaurabh.pdf",
   heroStats: [
     { label: "Projects", value: "20+" },
     { label: "Tech Stack", value: "10+" },
