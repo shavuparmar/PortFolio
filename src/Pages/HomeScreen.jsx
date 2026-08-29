@@ -1,49 +1,96 @@
-import { useState } from "react";
-import LoadingScreen from "../components/LoadingScreen";
+import { useState, useEffect } from "react";
+import Lenis from "lenis";
 
-// V5 Immersive Components (V4 Rebuild)
-import ScrollProgress from "../components/v5/ScrollProgress";
-import Navigation from "../components/v5/Navigation";
-import Hero from "../components/v5/Hero";
-import About from "../components/v5/About";
-import WhatIDo from "../components/v5/WhatIDo";
-import Skills from "../components/v5/Skills";
-import SelectedWork from "../components/v5/SelectedWork";
-import GraphicsGallery from "../components/v5/GraphicsGallery";
-import Journey from "../components/v5/Journey";
-import CertificateArc from "../components/v5/CertificateArc";
-import Contact from "../components/v5/Contact";
-import Footer from "../components/v5/Footer";
-import FloatingWhatsApp from "../components/v5/FloatingWhatsApp";
+// V7 Components
+import Navbar from "../components/Navbar";
+import Hero from "../components/Hero";
+import About from "../components/About";
+import Services from "../components/Services";
+import Skills from "../components/Skills";
+import Projects from "../components/Projects";
+import Graphics from "../components/Graphics";
+import Certificates from "../components/Certificates";
+import Journey from "../components/Journey";
+import Contact from "../components/Contact";
+import Footer from "../components/Footer";
+import FloatingWhatsApp from "../components/FloatingWhatsApp";
 
 export default function HomeScreen() {
   const [isLoading, setIsLoading] = useState(true);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    // Lenis Smooth Scroll Setup
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: "vertical",
+      gestureOrientation: "vertical",
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    lenis.on('scroll', (e) => {
+      setScrollProgress(e.progress * 100);
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // Initial Loading Simulation
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500);
+
+    return () => {
+      lenis.destroy();
+      clearTimeout(timer);
+    };
+  }, []);
 
   return (
     <>
-      {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
-      
-      <div className={`relative min-h-screen overflow-x-hidden bg-[#050505] text-[#F4F4F5] ${isLoading ? 'hidden' : ''}`}>
-        
-        <ScrollProgress />
-        <Navigation />
+      {isLoading ? (
+        <div className="fixed inset-0 bg-[#050505] z-50 flex items-center justify-center">
+          <div className="text-white font-mono text-sm tracking-widest uppercase animate-pulse">
+            Loading...
+          </div>
+        </div>
+      ) : (
+        <div className="relative min-h-screen bg-[#050505] text-[#F4F4F5] selection:bg-white selection:text-black">
+          
+          {/* Top Progress Bar */}
+          <div className="fixed top-0 left-0 w-full h-[2px] z-[60] bg-transparent">
+            <div 
+              className="h-full bg-white transition-all duration-100 ease-out" 
+              style={{ width: `${scrollProgress}%` }}
+            />
+          </div>
 
-        <main className="relative z-10">
-          <Hero />
-          <About />
-          <WhatIDo />
-          <Skills />
-          <SelectedWork />
-          <GraphicsGallery />
-          <Journey />
-          <CertificateArc />
-          <Contact />
-        </main>
+          <Navbar />
 
-        <Footer />
-        <FloatingWhatsApp />
+          <main className="relative z-10 w-full overflow-hidden">
+            <Hero />
+            <About />
+            <Services />
+            <Skills />
+            <Projects />
+            <Graphics />
+            <Journey />
+            <Certificates />
+            <Contact />
+          </main>
 
-      </div>
+          <Footer />
+          <FloatingWhatsApp />
+        </div>
+      )}
     </>
   );
 }

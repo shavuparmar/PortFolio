@@ -1,104 +1,105 @@
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import personal from "../details/personal";
 import social from "../details/social";
-import { ArrowUp } from "lucide-react";
+
+const navLinks = [
+  { name: "ABOUT", href: "#about" },
+  { name: "WORK", href: "#work" },
+  { name: "GRAPHICS", href: "#graphics" },
+  { name: "CERTIFICATES", href: "#certificates" },
+  { name: "CONTACT", href: "#contact" },
+];
 
 export default function Footer() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const [showBackToTop, setShowBackToTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setShowBackToTop(window.scrollY > 800);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
+  const whatsappMessage = encodeURIComponent("Hello Saurabh, I found your portfolio and would like to discuss a project with you.");
+  const whatsappUrl = `https://wa.me/${personal.phone.replace(/[^0-9]/g, '')}?text=${whatsappMessage}`;
 
   return (
-    <footer className="border-t border-zinc-200 bg-[#F4F1EA] px-6 py-24 relative overflow-hidden">
-      <div className="mx-auto max-w-[1600px] relative z-10">
-        <div className="grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-12 mb-20">
+    <footer className="bg-[#050505] pt-32 pb-12">
+      <div className="container mx-auto px-6 max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-8 mb-32">
           
-          {/* Brand & Contact */}
-          <div className="lg:col-span-5 flex flex-col items-start">
-            <h3 className="text-4xl sm:text-6xl font-black text-zinc-900 tracking-tighter uppercase leading-none mb-6">
-              {personal.brand}
-            </h3>
-            <p className="text-sm font-bold tracking-widest text-zinc-500 uppercase leading-relaxed mb-8 max-w-sm">
-              Designing digital experiences and building them into real products.
-            </p>
-            <a 
-              href={`mailto:${personal.email}`}
-              className="group inline-flex items-center gap-4 text-xl sm:text-2xl font-black tracking-tighter text-zinc-900 hover:text-zinc-500 transition-colors"
-            >
-              {personal.email}
-              <ArrowUp size={24} className="rotate-45 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            </a>
-            <a 
-              href={`https://wa.me/${personal.phone.replace(/[^0-9]/g, '')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 text-lg font-bold tracking-widest text-zinc-500 hover:text-green-600 transition-colors uppercase"
-            >
-              {personal.phone}
-            </a>
+          <div className="lg:col-span-6 flex flex-col">
+            <h2 className="text-[clamp(3rem,10vw,4.5rem)] font-bold tracking-tighter uppercase leading-[0.9] text-white mb-6 break-words">
+              Saurabh<br />Parmar
+            </h2>
+            <div className="flex flex-col gap-1">
+              <span className="text-[#888888] font-mono text-xs tracking-widest uppercase">
+                Full-Stack Developer
+              </span>
+              <span className="text-[#888888] font-mono text-xs tracking-widest uppercase">
+                Graphics Designer
+              </span>
+            </div>
           </div>
-
-          {/* Navigation */}
-          <div className="lg:col-span-2">
-            <h4 className="text-xs font-black text-zinc-400 uppercase tracking-[0.2em] mb-8">Navigation</h4>
-            <ul className="space-y-4">
-              {['Work', 'Design', 'Development', 'About', 'Certificates'].map((link) => (
-                <li key={link}>
-                  <a href={`#${link.toLowerCase()}`} className="text-sm font-bold tracking-widest uppercase text-zinc-900 transition-colors hover:text-zinc-500">
-                    {link}
+          
+          <div className="lg:col-span-3 flex flex-col gap-6">
+            <h4 className="text-white font-mono text-xs uppercase tracking-widest mb-2">Navigation</h4>
+            <ul className="flex flex-col gap-3">
+              {navLinks.map((link) => (
+                <li key={link.name}>
+                  <a href={link.href} className="text-[#888888] hover:text-white transition-colors text-sm font-medium tracking-wide">
+                    {link.name}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Socials */}
-          <div className="lg:col-span-3">
-            <h4 className="text-xs font-black text-zinc-400 uppercase tracking-[0.2em] mb-8">Socials</h4>
-            <ul className="space-y-4">
+          <div className="lg:col-span-3 flex flex-col gap-6">
+            <h4 className="text-white font-mono text-xs uppercase tracking-widest mb-2">Social & Direct</h4>
+            <ul className="flex flex-col gap-3">
+              <li>
+                <a href={`tel:${personal.phone.replace(/[^0-9+]/g, '')}`} className="text-[#888888] hover:text-white transition-colors text-sm font-medium tracking-wide">
+                  {personal.phone}
+                </a>
+              </li>
+              <li>
+                <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-[#888888] hover:text-white transition-colors text-sm font-medium tracking-wide">
+                  WhatsApp
+                </a>
+              </li>
               {social.map((item) => (
                 <li key={item.name}>
-                  <a
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm font-bold tracking-widest uppercase text-zinc-900 transition-colors hover:text-zinc-500 flex items-center gap-2 group"
-                  >
+                  <a href={item.link} target="_blank" rel="noopener noreferrer" className="text-[#888888] hover:text-white transition-colors text-sm font-medium tracking-wide">
                     {item.name}
-                    <ArrowUp size={14} className="rotate-45 opacity-0 -translate-x-2 translate-y-2 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0 transition-all" />
                   </a>
                 </li>
               ))}
             </ul>
-          </div>
-
-          {/* Back to Top */}
-          <div className="lg:col-span-2 flex flex-col items-start lg:items-end justify-start">
-            <button
-              onClick={scrollToTop}
-              className="group flex h-24 w-24 items-center justify-center rounded-full bg-zinc-900 text-[#F4F1EA] transition-transform hover:scale-110 active:scale-95"
-              aria-label="Scroll to top"
-            >
-              <ArrowUp size={32} className="transition-transform group-hover:-translate-y-2" />
-            </button>
-            <span className="text-xs font-bold tracking-widest uppercase text-zinc-500 mt-6 lg:text-right w-full">
-              Back to Top
-            </span>
           </div>
         </div>
 
-        {/* Copyright & Info */}
-        <div className="border-t border-zinc-200 pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
-          <p className="text-xs font-bold tracking-widest uppercase text-zinc-400 text-center md:text-left">
-            © {new Date().getFullYear()} {personal.name}. All rights reserved.
+        <div className="flex flex-col sm:flex-row justify-between items-center pt-8 border-t border-[#222222] gap-4">
+          <p className="text-[#555555] font-mono text-xs uppercase tracking-widest">
+            © {new Date().getFullYear()} Saurabh Parmar. All Rights Reserved.
           </p>
-          <div className="flex items-center gap-6">
-            <p className="text-xs font-bold tracking-widest uppercase text-zinc-400">
-              Built with React & Tailwind
-            </p>
-            <a href={personal.resumeLink} target="_blank" rel="noopener noreferrer" className="text-xs font-bold tracking-widest uppercase text-zinc-900 hover:text-zinc-500 transition-colors">
-              [ Download Resume ]
-            </a>
-          </div>
+          
+          <AnimatePresence>
+            {showBackToTop && (
+              <motion.button
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                onClick={scrollToTop}
+                className="group flex items-center gap-2 text-[#888888] hover:text-white transition-colors font-mono text-xs uppercase tracking-widest bg-[#111111] px-4 py-2 border border-[#333333] rounded-full"
+              >
+                <span>Back To Top</span>
+                <span className="group-hover:-translate-y-1 transition-transform">↑</span>
+              </motion.button>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </footer>
