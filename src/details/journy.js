@@ -42,19 +42,19 @@ export const experienceData = [
       "Delivered production UI mockups and complete brand identity packages",
     ],
   },
-  {
-    period: "Previous Experience",
-    role: "Junior Store Manager",
-    company: "Retail Store Operations",
-    location: "Surat, Gujarat",
-    description:
-      "Managed day-to-day retail store floor operations, daily inventory logs, billing processes, supplier deliveries, and customer service. Developed strong discipline in practical workflow optimization, reliability, and clear human communication.",
-    highlights: [
-      "Inventory & stock management",
-      "Customer communication & service",
-      "Billing & store floor administration",
-    ],
-  },
+  // {
+  //   period: "Previous Experience",
+  //   role: "Junior Store Manager",
+  //   company: "Retail Store Operations",
+  //   location: "Surat, Gujarat",
+  //   description:
+  //     "Managed day-to-day retail store floor operations, daily inventory logs, billing processes, supplier deliveries, and customer service. Developed strong discipline in practical workflow optimization, reliability, and clear human communication.",
+  //   highlights: [
+  //     "Inventory & stock management",
+  //     "Customer communication & service",
+  //     "Billing & store floor administration",
+  //   ],
+  // },
 ];
 
 const journy = {
