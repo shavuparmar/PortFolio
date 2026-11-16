@@ -1,14 +1,33 @@
 const about = {
-  title: "About Me",
-  description:
-    "I am a passionate software developer focused on building modern, practical, and scalable digital solutions. My work revolves around creating clean user interfaces, smooth user experiences, and production-ready applications. With hands-on experience in React, Tailwind CSS, JavaScript, Node.js, Express.js, MongoDB, and AI API integrations, I enjoy transforming ideas into real-world software products. I specialize in frontend development and full-stack MERN applications, building responsive systems such as booking platforms, admin dashboards, private software tools, and AI-powered applications. I am dedicated to writing clean, maintainable code, continuously learning new technologies, and delivering high-quality software that is visually polished, efficient, and user-focused.",
-
-  highlights: [
-    "Develop modern responsive interfaces using React and Tailwind CSS",
-    "Build complete full-stack MERN applications with scalable architecture",
-    "Integrate AI APIs and intelligent features into web applications",
-    "Design clean UI and smooth UX with modern frontend practices",
-   
+  heading: "About Me",
+  subheading: "Developer and designer based in Surat, Gujarat, India.",
+  story: [
+    {
+      title: "How I Got Started",
+      text: "I became interested in web development because I wanted to understand how ideas turn into interactive screens that anyone in the world can open. What started with tinkering with HTML and CSS grew into building full React applications, connecting databases, and deploying practical business software.",
+    },
+    {
+      title: "Why Design Matters to Me",
+      text: "Code makes a website work, but design makes people want to use it. Early on, I realized that many developer projects struggle because they lack visual hierarchy, good typography, and clean spacing. I learned tools like Photoshop and Canva to create my own logos, posters, and layouts so the websites I build look as good as they function.",
+    },
+    {
+      title: "My Education & Learning",
+      text: "I earned my Diploma in Computer Engineering from Shree Dhanvantary College and am currently pursuing my B.Tech in Computer Engineering at P P Savani University. Alongside my formal studies, I constantly learn on my own—completing accredited courses from Google, Google Cloud, and Scrimba, and working on client projects.",
+    },
+    {
+      title: "My Approach to Building",
+      text: "I like keeping things simple, usable, and honest. I don't build complicated features just for the sake of it. Whether I am creating an order management system for a wholesale store, a portfolio website, or a business card, I focus on what the user actually needs and make sure it is reliable and easy to understand.",
+    },
+    {
+      title: "What I'm Looking For",
+      text: "I am looking for opportunities where I can contribute as a junior frontend or web developer. I want to work with teams that value clean code, thoughtful design, and continuous learning, while continuing to develop my skills on real-world projects.",
+    },
+  ],
+  quickFacts: [
+    { label: "Location", value: "Surat, Gujarat, India" },
+    { label: "Education", value: "B.Tech in Computer Engineering" },
+    { label: "Focus", value: "Web Development & Visual Design" },
+    { label: "Available For", value: "Full-Time Roles & Freelance Projects" },
   ],
 };
 

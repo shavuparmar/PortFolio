@@ -1,117 +1,245 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
+import { ArrowDown, ArrowUpRight, Download, Github, Linkedin, Mail, MapPin, Sparkles, Terminal } from "lucide-react";
 import personal from "../details/personal";
+import cardFront from "../Businescards/dey1.png";
+import orderAppImg from "../assets/orderapp.png";
 
 export default function Hero() {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
+  const scrollToWork = (e) => {
+    e.preventDefault();
+    const element = document.getElementById("work") || document.getElementById("projects");
+    if (element) {
+      const navOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: elementPosition - navOffset,
+        behavior: "smooth",
+      });
+    }
+  };
 
-  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const scaleImage = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const scrollToContact = (e) => {
+    e.preventDefault();
+    const element = document.getElementById("contact");
+    if (element) {
+      const navOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({
+        top: elementPosition - navOffset,
+        behavior: "smooth",
+      });
+    }
+  };
 
   return (
-    <section id="home" ref={containerRef} className="relative min-h-[100vh] flex items-center pt-24 pb-12 overflow-hidden">
-      <div className="container mx-auto px-6 max-w-7xl relative z-10">
-        <motion.div 
-          style={{ y: yText, opacity }} 
-          className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center"
-        >
+    <section
+      id="home"
+      className="relative min-h-[95vh] flex items-center pt-28 pb-16 sm:py-32 overflow-hidden grid-backdrop"
+    >
+      {/* Subtle radial ambient glow in the top right */}
+      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-[#D4FF00]/[0.03] rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-10 left-10 w-[350px] h-[350px] bg-white/[0.02] rounded-full blur-[120px] pointer-events-none" />
+
+      <div className="container mx-auto px-5 sm:px-8 max-w-6xl relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center">
           
-          {/* Left Text Block */}
-          <div className="lg:col-span-7 flex flex-col justify-center order-2 lg:order-1">
+          {/* Left Column: Asymmetrical Editorial Typography */}
+          <div className="lg:col-span-7 flex flex-col justify-center">
+            
+            {/* Live Status Pill & Geo Beacon */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="flex items-center gap-4 text-[#888888] font-mono text-xs tracking-widest uppercase mb-8"
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-3 px-3.5 py-1.5 rounded-full glass-dock w-fit mb-8"
             >
-              <span>01 / Hello</span>
-              <span className="w-12 h-[1px] bg-[#333333]"></span>
+              <span className="flex h-2 w-2 relative">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D4FF00] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D4FF00]"></span>
+              </span>
+              <span className="font-mono text-[11px] uppercase tracking-wider text-[#9A9AA4] flex items-center gap-1.5">
+                <MapPin size={11} className="text-[#D4FF00]" />
+                {personal.location} <span className="text-[#5E606B]">[ {personal.coordinates} ]</span>
+              </span>
             </motion.div>
 
-            <motion.h1 
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-              className="text-[clamp(3rem,12vw,8rem)] font-bold leading-[0.85] tracking-tighter uppercase text-white mb-6 break-words"
-            >
-              Saurabh<br />
-              <span className="text-[#888888]">Parmar</span>
-            </motion.h1>
-            
+            {/* Massive Display Monogram / Title */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="mb-4"
             >
-              <h2 className="text-2xl sm:text-3xl font-light text-white mb-8 leading-snug">
-                FULL-STACK<br />
-                DEVELOPER<br />
-                <span className="text-[#888888]">+ GRAPHICS<br />DESIGNER</span>
-              </h2>
+              <div className="font-mono text-xs text-[#D4FF00] tracking-widest uppercase mb-2 flex items-center gap-2">
+                <Terminal size={13} />
+                <span>Web Developer & Graphic Designer</span>
+              </div>
+              <h1 className="font-display font-extrabold text-5xl sm:text-6xl lg:text-7xl text-white tracking-tight leading-[1.05]">
+                SAURABH <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#E4E4E7] to-[#71717A]">
+                  PARMAR
+                </span>
+                <span className="text-[#D4FF00]">.</span>
+              </h1>
+            </motion.div>
 
-              <p className="text-[#A0A0A0] text-sm sm:text-base font-light max-w-sm mb-12 leading-relaxed">
-                {personal.shortIntro}
-              </p>
+            {/* Thoughtful, Human Narrative Copy */}
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-base sm:text-lg text-[#9A9AA4] leading-relaxed max-w-xl mb-8 font-sans"
+            >
+              "I turn ideas into digital experiences through code and design." Bridging robust frontend engineering with editorial graphic design to create digital products that feel intuitive, purposeful, and memorable.
+            </motion.p>
 
-              <div className="flex flex-wrap gap-6 font-mono text-xs uppercase tracking-widest">
-                <a 
-                  href="#work" 
-                  className="px-6 py-3 border border-white bg-white text-black hover:bg-transparent hover:text-white transition-all font-bold group flex items-center gap-2"
+            {/* Action CTAs */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-wrap items-center gap-4 mb-10"
+            >
+              <a
+                href="#work"
+                onClick={scrollToWork}
+                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-[#D4FF00] text-black font-semibold text-xs uppercase tracking-wider hover:bg-white transition-all shadow-[0_0_20px_rgba(212,255,0,0.2)]"
+              >
+                <span>Explore Selected Work</span>
+                <ArrowDown size={14} />
+              </a>
+
+              <a
+                href="#contact"
+                onClick={scrollToContact}
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full glass-dock text-white font-medium text-xs uppercase tracking-wider hover:border-white/30 transition-all"
+              >
+                <span>Get In Touch</span>
+                <ArrowUpRight size={14} className="text-[#D4FF00]" />
+              </a>
+
+              <a
+                href={personal.resumeLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-4 py-3.5 rounded-full glass-dock text-[#9A9AA4] hover:text-white text-xs font-mono transition-colors"
+                title="Download Resume (PDF)"
+              >
+                <Download size={13} />
+                <span className="hidden sm:inline">Resume</span>
+              </a>
+            </motion.div>
+
+            {/* Micro Social Bar */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="flex items-center gap-6 pt-4 border-t border-white/5"
+            >
+              <span className="font-mono text-[11px] text-[#5E606B] uppercase tracking-wider">
+                Direct Channels:
+              </span>
+              <div className="flex items-center gap-4 text-xs font-mono">
+                <a
+                  href={personal.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#9A9AA4] hover:text-white flex items-center gap-1.5 transition-colors"
                 >
-                  <span>Explore Work</span>
-                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  <Github size={13} />
+                  <span>GitHub</span>
                 </a>
-                <a 
-                  href="#contact" 
-                  className="px-6 py-3 border border-[#333333] hover:border-white text-white transition-all flex items-center gap-2 group"
+                <a
+                  href={personal.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#9A9AA4] hover:text-white flex items-center gap-1.5 transition-colors"
                 >
-                  <span>Contact Me</span>
-                  <span className="group-hover:translate-x-1 transition-transform">→</span>
+                  <Linkedin size={13} />
+                  <span>LinkedIn</span>
+                </a>
+                <a
+                  href={`mailto:${personal.email}`}
+                  className="text-[#9A9AA4] hover:text-[#D4FF00] flex items-center gap-1.5 transition-colors"
+                >
+                  <Mail size={13} />
+                  <span>Email</span>
                 </a>
               </div>
             </motion.div>
+
           </div>
 
-          {/* Right Visual Block */}
-          <div className="lg:col-span-5 order-1 lg:order-2">
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.2, ease: [0.76, 0, 0.24, 1] }}
-              style={{ scale: scaleImage }}
-              className="w-full aspect-[4/5] sm:aspect-square lg:aspect-[3/4] max-w-sm lg:max-w-none mx-auto relative overflow-hidden bg-[#0a0a0a] border border-[#222222]"
-            >
-              {/* Using a layered composition or graphic artwork placeholder */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#111111] to-[#050505]" />
-              <div className="absolute inset-0 opacity-20 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay" />
+          {/* Right Column: Layered Art-Directed Studio Composition */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="lg:col-span-5 relative"
+          >
+            <div className="relative mx-auto max-w-md">
               
-              <div className="absolute inset-0 flex flex-col justify-between p-8">
-                <div className="self-end text-[#333] font-black text-6xl tracking-tighter">SP</div>
-                <div className="text-[#888] font-mono text-xs uppercase tracking-widest writing-vertical-rl rotate-180">
-                  EST. 2024
+              {/* Back Card: Korder Production System Mockup */}
+              <div className="relative rounded-2xl p-4 glass-panel border border-white/10 shadow-2xl backdrop-blur-xl">
+                <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/5 text-[11px] font-mono text-[#9A9AA4]">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <span className="text-white font-medium">Keshav Krupa // Korder OMS</span>
+                  </div>
+                  <span className="text-[#D4FF00]">Full Stack System</span>
+                </div>
+                <div className="relative rounded-xl overflow-hidden aspect-[16/10] bg-black/60 border border-white/5">
+                  <img
+                    src={orderAppImg}
+                    alt="Keshav Krupa Order Management System"
+                    className="w-full h-full object-cover object-top opacity-85 hover:opacity-100 transition-opacity"
+                  />
+                  <div className="absolute bottom-2 left-2 right-2 px-2.5 py-1.5 rounded-lg bg-black/80 backdrop-blur-md border border-white/10 flex items-center justify-between text-[10px] font-mono">
+                    <span className="text-[#9A9AA4]">Live Production Client App</span>
+                    <span className="text-[#D4FF00]">Next.js • Node • Mongo</span>
+                  </div>
                 </div>
               </div>
-            </motion.div>
-          </div>
 
-        </motion.div>
+              {/* Floating Overlapping Card: Deyzora Infotech Physical Card Preview */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="absolute -bottom-8 -left-6 sm:-left-10 w-[80%] rounded-2xl p-3 glass-panel-elevated border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
+              >
+                <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/5 text-[10px] font-mono">
+                  <span className="text-white font-medium">Deyzora Infotech</span>
+                  <span className="text-[#D4FF00]">Print & Branding</span>
+                </div>
+                <div className="relative rounded-lg overflow-hidden border border-white/10 aspect-[16/9] bg-stone-900">
+                  <img
+                    src={cardFront}
+                    alt="Deyzora Infotech Business Card"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="pt-2 flex items-center justify-between text-[9px] font-mono text-[#9A9AA4]">
+                  <span>300 DPI // CMYK Print</span>
+                  <a href="#business-card" className="text-[#D4FF00] hover:underline flex items-center gap-0.5">
+                    <span>Inspect</span>
+                    <ArrowUpRight size={10} />
+                  </a>
+                </div>
+              </motion.div>
+
+              {/* Verified Badge */}
+              <div className="absolute -top-4 -right-4 px-3 py-1.5 rounded-full glass-dock border border-[#D4FF00]/30 shadow-lg flex items-center gap-1.5 text-[10px] font-mono text-[#D4FF00]">
+                <Sparkles size={11} />
+                <span>14 Verified Coursera Credentials</span>
+              </div>
+
+            </div>
+          </motion.div>
+
+        </div>
       </div>
-
-      <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 1 }}
-        style={{ opacity }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 text-[#888888] font-mono text-xs uppercase tracking-widest"
-      >
-        <div className="w-[1px] h-12 bg-gradient-to-b from-[#888888] to-transparent animate-pulse" />
-        <span>Scroll</span>
-      </motion.div>
     </section>
   );
 }

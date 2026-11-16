@@ -1,85 +1,182 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
+import { User, MapPin, GraduationCap, Sparkles, Languages, CheckCircle2, ArrowUpRight } from "lucide-react";
 import about from "../details/about";
+import personal from "../details/personal";
 
 export default function About() {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  // Background text parallax
-  const bgTextY1 = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
-  const bgTextY2 = useTransform(scrollYProgress, [0, 1], ["50%", "0%"]);
-
-  const chapters = [
-    {
-      title: "WHO I AM",
-      content: "I'm Saurabh Parmar, a creative developer blending frontend engineering with graphics design. I specialize in building digital experiences that are both robust and visually compelling."
-    },
-    {
-      title: "WHAT I BUILD",
-      content: about.highlights[1] || "Scalable full-stack MERN applications and intuitive frontend interfaces. I focus on clean architecture, performance, and responsive layouts."
-    },
-    {
-      title: "WHAT I DESIGN",
-      content: about.highlights[3] || "Clean UI, smooth UX, and premium modern graphics tailored for the web. I believe design is not just how it looks, but how it works."
-    },
-    {
-      title: "HOW I WORK",
-      content: "I bridge the gap between aesthetics and functionality. By understanding both the design system and the underlying code, I ensure the final product matches the original vision flawlessly."
-    },
-    {
-      title: "WHAT I'M LEARNING",
-      content: "Continuously exploring advanced web animations, 3D browser experiences, and modern architectural patterns to push the boundaries of what's possible on the web."
-    },
-    {
-      title: "WHAT I WANT TO BUILD",
-      content: "Interactive digital products that leave a lasting impression and solve real-world problems creatively, pushing beyond standard templates into unique custom experiences."
-    }
-  ];
-
   return (
-    <section id="about" ref={containerRef} className="relative bg-[#050505] text-white py-32">
-      
-      {/* Background massive typography */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none flex flex-col justify-between opacity-5 select-none">
-        <motion.div style={{ y: bgTextY1 }} className="text-[20vw] font-black leading-none whitespace-nowrap">
-          CODE DESIGN
-        </motion.div>
-        <motion.div style={{ y: bgTextY2 }} className="text-[20vw] font-black leading-none whitespace-nowrap text-right">
-          BUILD LEARN REPEAT
-        </motion.div>
-      </div>
-
-      <div className="container mx-auto px-6 max-w-5xl relative z-10">
+    <section id="about" className="py-24 sm:py-32 border-t border-white/5 relative grid-backdrop">
+      <div className="container mx-auto px-5 sm:px-8 max-w-6xl relative z-10">
         
-        <div className="mb-24 flex items-center gap-4 text-[#888888] font-mono text-xs tracking-widest uppercase">
-          <span>02 / About</span>
-          <span className="w-12 h-[1px] bg-[#333333]"></span>
+        {/* Editorial Section Header */}
+        <div className="mb-16 sm:mb-20">
+          <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-[#9A9AA4] mb-3">
+            <span className="w-2 h-2 rounded-full bg-[#D4FF00]"></span>
+            <User size={13} className="text-[#D4FF00]" />
+            <span>01 // Profile & Background</span>
+          </div>
+          <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight mb-3">
+            About Me<span className="text-[#D4FF00]">.</span>
+          </h2>
+          <p className="text-sm sm:text-base text-[#9A9AA4] max-w-xl font-sans">
+            {about.subheading}
+          </p>
         </div>
 
-        <div className="flex flex-col gap-32">
-          {chapters.map((chapter, index) => {
-            return (
-              <motion.div 
-                key={index}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-20%" }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className={`flex flex-col ${index % 2 === 0 ? 'md:items-start' : 'md:items-end text-left md:text-right'}`}
-              >
-                <h2 className="text-4xl md:text-6xl font-bold uppercase tracking-tighter text-[#E5E5E5] mb-6">
-                  {chapter.title}
-                </h2>
-                <p className="text-xl md:text-3xl font-light text-[#888888] leading-relaxed max-w-2xl">
-                  {chapter.content}
-                </p>
-              </motion.div>
-            );
-          })}
+        {/* Editorial Asymmetric Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
+          
+          {/* Left Column: Architectural Profile Snapshot Card */}
+          <div className="lg:col-span-4 flex flex-col gap-6">
+            <div className="p-7 rounded-2xl glass-panel border border-white/10 sticky top-28">
+              
+              <div className="flex items-center justify-between pb-4 mb-5 border-b border-white/5">
+                <span className="font-mono text-xs text-[#D4FF00] uppercase tracking-wider">
+                  Identity File
+                </span>
+                <span className="font-mono text-[10px] text-[#5E606B]">
+                  SP // SURAT
+                </span>
+              </div>
+
+              <div className="space-y-4 text-xs font-mono">
+                <div>
+                  <span className="text-[#5E606B] block uppercase tracking-wider text-[10px] mb-1">
+                    Full Name
+                  </span>
+                  <span className="font-sans font-bold text-base text-white">
+                    {personal.name}
+                  </span>
+                </div>
+
+                <div>
+                  <span className="text-[#5E606B] block uppercase tracking-wider text-[10px] mb-1">
+                    Location & Hub
+                  </span>
+                  <span className="font-sans text-sm text-[#EDEDF2] flex items-center gap-1.5">
+                    <MapPin size={13} className="text-[#D4FF00]" />
+                    {personal.location}
+                  </span>
+                </div>
+
+                <div>
+                  <span className="text-[#5E606B] block uppercase tracking-wider text-[10px] mb-1">
+                    Degree In Progress
+                  </span>
+                  <span className="font-sans text-sm text-[#EDEDF2] flex items-center gap-1.5">
+                    <GraduationCap size={14} className="text-[#D4FF00]" />
+                    B.Tech, P P Savani University
+                  </span>
+                </div>
+
+                <div>
+                  <span className="text-[#5E606B] block uppercase tracking-wider text-[10px] mb-1">
+                    Prior Academic Credential
+                  </span>
+                  <span className="font-sans text-sm text-[#9A9AA4]">
+                    Diploma, Shree Dhanvantary
+                  </span>
+                </div>
+
+                <div>
+                  <span className="text-[#5E606B] block uppercase tracking-wider text-[10px] mb-1">
+                    Spoken Languages
+                  </span>
+                  <span className="font-sans text-sm text-[#9A9AA4] flex items-center gap-1.5">
+                    <Languages size={13} className="text-[#5E606B]" />
+                    English, Hindi, Gujarati
+                  </span>
+                </div>
+              </div>
+
+              {/* Status Note */}
+              <div className="mt-6 pt-5 border-t border-white/5">
+                <div className="flex items-start gap-2.5">
+                  <span className="w-2 h-2 rounded-full bg-[#D4FF00] mt-1 shrink-0 animate-pulse"></span>
+                  <p className="text-xs text-[#9A9AA4] leading-relaxed font-sans">
+                    Actively open to junior web developer roles, frontend engineering opportunities, and creative design contracts.
+                  </p>
+                </div>
+              </div>
+
+              {/* Resume Quick Link */}
+              <div className="mt-6">
+                <a
+                  href={personal.resumeLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-2.5 px-4 rounded-xl border border-white/10 hover:border-[#D4FF00]/40 text-xs font-mono uppercase tracking-wider text-white hover:text-[#D4FF00] hover:bg-white/5 transition-all flex items-center justify-center gap-2"
+                >
+                  <span>View Verified Resume</span>
+                  <ArrowUpRight size={13} />
+                </a>
+              </div>
+
+            </div>
+          </div>
+
+          {/* Right Column: Personal Story Modules */}
+          <div className="lg:col-span-8 flex flex-col gap-8">
+            
+            {/* Pull Quote */}
+            <div className="p-6 rounded-2xl glass-dock border border-[#D4FF00]/20 bg-[#D4FF00]/[0.02] relative">
+              <span className="font-mono text-[10px] text-[#D4FF00] uppercase tracking-widest block mb-2">
+                Core Philosophy
+              </span>
+              <p className="font-display text-xl sm:text-2xl text-white font-semibold tracking-tight leading-snug">
+                "Code builds the architecture. Design gives it a soul."
+              </p>
+              <p className="text-xs text-[#9A9AA4] mt-2 font-sans">
+                A digital product must be functionally bulletproof and visually compelling to truly resonate with real users.
+              </p>
+            </div>
+
+            {/* Narrative Story Blocks */}
+            <div className="space-y-6">
+              {about.story.map((item, index) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.08 }}
+                  className="p-6 sm:p-7 rounded-2xl glass-panel border border-white/10 hover:border-white/20 transition-colors"
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="font-mono text-xs text-[#D4FF00] font-semibold">
+                      0{index + 1} //
+                    </span>
+                    <h3 className="font-display font-bold text-lg sm:text-xl text-white tracking-tight">
+                      {item.title}
+                    </h3>
+                  </div>
+
+                  <p className="text-sm sm:text-base text-[#9A9AA4] leading-relaxed font-sans">
+                    {item.text}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Quick Fact Badges */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
+              {about.quickFacts.map((fact) => (
+                <div
+                  key={fact.label}
+                  className="p-3.5 rounded-xl glass-dock border border-white/5 flex flex-col gap-1"
+                >
+                  <span className="font-mono text-[10px] text-[#5E606B] uppercase">
+                    {fact.label}
+                  </span>
+                  <span className="font-sans font-medium text-xs text-white">
+                    {fact.value}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+          </div>
+
         </div>
 
       </div>
