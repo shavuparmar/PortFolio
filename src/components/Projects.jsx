@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FolderGit2,
@@ -10,11 +10,62 @@ import {
   ArrowUpRight,
   Terminal,
   Sparkles,
-  Layers,
 } from "lucide-react";
 import projects from "../details/projects";
 
 const filterOptions = ["All", "Featured", "Full Stack", "Frontend"];
+
+// Interactive 3D Tilt Wrapper Component
+function TiltCard({ children, className = "", onClick }) {
+  const cardRef = useRef(null);
+  const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0, glareX: 50, glareY: 50, isHovered: false });
+
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / centerY) * -6.5;
+    const rotateY = ((x - centerX) / centerX) * 6.5;
+
+    const glareX = (x / rect.width) * 100;
+    const glareY = (y / rect.height) * 100;
+
+    setTilt({ rotateX, rotateY, glareX, glareY, isHovered: true });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ rotateX: 0, rotateY: 0, glareX: 50, glareY: 50, isHovered: false });
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      onClick={onClick}
+      style={{
+        transform: `perspective(900px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
+        transition: tilt.isHovered ? "transform 0.1s ease-out" : "transform 0.5s ease-out",
+        transformStyle: "preserve-3d",
+      }}
+      className={`relative ${className}`}
+    >
+      {children}
+      {tilt.isHovered && (
+        <div
+          className="absolute inset-0 pointer-events-none rounded-xl transition-opacity duration-300"
+          style={{
+            background: `radial-gradient(circle at ${tilt.glareX}% ${tilt.glareY}%, rgba(212, 255, 0, 0.1), transparent 65%)`,
+          }}
+        />
+      )}
+    </div>
+  );
+}
 
 export default function Projects() {
   const [activeFilter, setActiveFilter] = useState("All");
@@ -48,7 +99,7 @@ export default function Projects() {
               Selected Works<span className="text-[#D4FF00]">.</span>
             </h2>
             <p className="text-sm sm:text-base text-[#9A9AA4] max-w-xl font-sans">
-              Real-world software systems, client websites, and web applications engineered with clean code and purpose.
+              Real-world software systems, client websites, and web applications engineered with 3D interaction, clean code, and purpose.
             </p>
           </div>
 
@@ -70,7 +121,7 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* Part 1: Hero Featured Case Studies (Asymmetric editorial layout) */}
+        {/* Part 1: Hero Featured Case Studies with 3D Tilt Previews */}
         {featuredProjects.length > 0 && (
           <div className="space-y-12 sm:space-y-16 mb-16">
             {featuredProjects.map((project, idx) => {
@@ -79,9 +130,9 @@ export default function Projects() {
               return (
                 <motion.div
                   key={project.id}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 25 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: true, margin: "-40px" }}
                   transition={{ duration: 0.6 }}
                   className="rounded-2xl glass-panel overflow-hidden border border-white/10 hover:border-white/20 transition-all p-6 sm:p-8"
                 >
@@ -90,15 +141,15 @@ export default function Projects() {
                       isEven ? "" : "lg:flex-row-reverse"
                     }`}
                   >
-                    {/* Visual Mockup Container */}
+                    {/* Visual Mockup Container with 3D Tilt */}
                     <div
                       className={`lg:col-span-6 ${
                         isEven ? "lg:order-1" : "lg:order-2"
                       }`}
                     >
-                      <div
+                      <TiltCard
                         onClick={() => setSelectedProject(project)}
-                        className="relative aspect-[16/10] rounded-xl overflow-hidden glass-dock border border-white/10 cursor-pointer group flex items-center justify-center p-3"
+                        className="aspect-[16/10] rounded-xl overflow-hidden glass-dock border border-white/10 cursor-pointer group flex items-center justify-center p-3 shadow-lg"
                       >
                         {project.image ? (
                           <img
@@ -124,7 +175,7 @@ export default function Projects() {
                             <span>View Case Details</span>
                           </span>
                         </div>
-                      </div>
+                      </TiltCard>
                     </div>
 
                     {/* Content Details */}
@@ -134,11 +185,19 @@ export default function Projects() {
                       }`}
                     >
                       <div>
+                        {/* Animated Project Numbering */}
                         <div className="flex items-center justify-between gap-4 mb-3">
-                          <span className="font-mono text-xs uppercase tracking-wider text-[#D4FF00]">
-                            0{idx + 1} // {project.category}
-                          </span>
-                          <span className="px-2.5 py-0.5 rounded-full glass-dock text-[10px] font-mono text-[#EDEDF2] border border-[#D4FF00]/30">
+                          <div className="flex items-center gap-2">
+                            <span className="flex h-2 w-2 relative">
+                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D4FF00] opacity-75"></span>
+                              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D4FF00]"></span>
+                            </span>
+                            <span className="font-mono text-xs uppercase tracking-wider text-[#D4FF00]">
+                              0{idx + 1} // {project.category}
+                            </span>
+                          </div>
+                          <span className="px-2.5 py-0.5 rounded-full glass-dock text-[10px] font-mono text-[#EDEDF2] border border-[#D4FF00]/30 flex items-center gap-1">
+                            <Sparkles size={10} className="text-[#D4FF00]" />
                             Featured Work
                           </span>
                         </div>
@@ -157,7 +216,7 @@ export default function Projects() {
 
                         {/* Tech Chips */}
                         <div className="flex flex-wrap gap-2 mb-8">
-                          {project.tech.map((t) => (
+                          {(project.tech || []).map((t) => (
                             <span
                               key={t}
                               className="px-2.5 py-1 rounded-md glass-dock border border-white/5 text-[11px] font-mono text-[#EDEDF2]"
@@ -225,23 +284,19 @@ export default function Projects() {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {regularProjects.map((project, idx) => (
-                <motion.div
+              {regularProjects.map((project) => (
+                <TiltCard
                   key={project.id}
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: idx * 0.05 }}
                   className="rounded-2xl p-6 glass-panel border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between group"
                 >
                   <div>
-                    {/* Header */}
+                    {/* Header with animated numbering */}
                     <div className="flex items-center justify-between mb-3 text-[11px] font-mono">
                       <span className="text-[#D4FF00] uppercase">
                         {project.category}
                       </span>
                       <span className="text-[#5E606B]">
-                        #{project.id}
+                        #{String(project.id).padStart(2, "0")}
                       </span>
                     </div>
 
@@ -259,7 +314,7 @@ export default function Projects() {
 
                     {/* Tech Badges */}
                     <div className="flex flex-wrap gap-1.5 mb-6">
-                      {project.tech.map((t) => (
+                      {(project.tech || []).map((t) => (
                         <span
                           key={t}
                           className="px-2 py-0.5 rounded glass-dock border border-white/5 text-[10px] font-mono text-[#9A9AA4]"
@@ -311,7 +366,7 @@ export default function Projects() {
                       <Maximize2 size={13} />
                     </button>
                   </div>
-                </motion.div>
+                </TiltCard>
               ))}
             </div>
           </div>
@@ -381,7 +436,7 @@ export default function Projects() {
                     Technologies & Architecture
                   </h4>
                   <div className="flex flex-wrap gap-2">
-                    {selectedProject.tech.map((t) => (
+                    {(selectedProject.tech || []).map((t) => (
                       <span
                         key={t}
                         className="px-3 py-1.5 rounded-lg glass-dock border border-white/10 text-xs font-mono text-white"

@@ -133,7 +133,7 @@ export default function About() {
 
             {/* Narrative Story Blocks */}
             <div className="space-y-6">
-              {about.story.map((item, index) => (
+              {(about?.story || []).map((item, index) => (
                 <motion.div
                   key={item.title}
                   initial={{ opacity: 0, y: 15 }}
@@ -160,7 +160,7 @@ export default function About() {
 
             {/* Quick Fact Badges */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
-              {about.quickFacts.map((fact) => (
+              {(about?.quickFacts || []).map((fact) => (
                 <div
                   key={fact.label}
                   className="p-3.5 rounded-xl glass-dock border border-white/5 flex flex-col gap-1"

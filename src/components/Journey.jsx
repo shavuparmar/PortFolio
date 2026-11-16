@@ -120,7 +120,7 @@ export default function Journey() {
                     </p>
 
                     <div className="space-y-2 pt-2 border-t border-white/5">
-                      {item.highlights.map((h, i) => (
+                      {(item.highlights || []).map((h, i) => (
                         <div key={i} className="flex items-start gap-2 text-xs text-[#EDEDF2] font-sans">
                           <CheckCircle2 size={13} className="text-[#D4FF00] mt-0.5 shrink-0" />
                           <span>{h}</span>
@@ -180,7 +180,7 @@ export default function Journey() {
                     </p>
 
                     <div className="flex flex-wrap gap-1.5 pt-2 border-t border-white/5">
-                      {item.highlights.map((h, i) => (
+                      {(item.highlights || []).map((h, i) => (
                         <span
                           key={i}
                           className="px-2.5 py-1 rounded-md glass-dock border border-white/5 text-[10px] font-mono text-[#EDEDF2]"

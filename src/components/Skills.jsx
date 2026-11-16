@@ -64,7 +64,7 @@ export default function Skills() {
 
                   {/* Clean Brutalist Tags */}
                   <div className="flex flex-wrap gap-2">
-                    {category.items.map((skill) => (
+                    {(category.items || []).map((skill) => (
                       <span
                         key={skill}
                         className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg glass-dock border border-white/5 hover:border-[#D4FF00]/40 text-xs font-mono text-[#EDEDF2] hover:text-[#D4FF00] transition-colors"

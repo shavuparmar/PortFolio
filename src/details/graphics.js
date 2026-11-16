@@ -23,6 +23,20 @@ export const businessCardData = {
   backImage: cardBack,
   concept:
     "A clean geometric brand identity pairing royal cobalt blue with crisp white typography. The design incorporates angular intersecting blocks representing digital momentum and tech architecture, complemented by clean iconography for contact touchpoints.",
+  description:
+    "A clean geometric brand identity pairing royal cobalt blue with crisp white typography. The design incorporates angular intersecting blocks representing digital momentum and tech architecture, complemented by clean iconography for contact touchpoints.",
+  highlights: [
+    "Clean geometric grid with angular corporate accents",
+    "High-contrast legible typography optimized for print",
+    "Balanced dual-side layout with front contact data and back brand identity",
+    "Prepared at 300 DPI print-ready CMYK specification",
+  ],
+  specs: [
+    "3.5 x 2.0 inches (Standard Card)",
+    "300 DPI Resolution",
+    "CMYK Color Profile",
+    "Double-Sided Print",
+  ],
   tags: ["Business Card", "Print Design", "Brand Identity", "Minimalist"],
 };
 

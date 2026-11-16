@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Award,
@@ -8,35 +8,39 @@ import {
   Download,
   Maximize2,
   X,
-  CheckCircle2,
+  ShieldCheck,
   LayoutGrid,
   Sparkles,
-  ShieldCheck,
+  MousePointerClick,
 } from "lucide-react";
 import certificates from "../details/certificates";
 
 export default function Certificates() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [viewMode, setViewMode] = useState("showcase"); // 'showcase' | 'grid'
+  const [viewMode, setViewMode] = useState("arc"); // 'arc' | 'grid'
   const [selectedCert, setSelectedCert] = useState(null);
+  const arcContainerRef = useRef(null);
+
+  const total = certificates.length;
 
   const nextCert = useCallback(() => {
-    setActiveIndex((prev) => (prev + 1) % certificates.length);
-  }, []);
+    setActiveIndex((prev) => (prev + 1) % total);
+  }, [total]);
 
   const prevCert = useCallback(() => {
-    setActiveIndex((prev) => (prev - 1 + certificates.length) % certificates.length);
-  }, []);
+    setActiveIndex((prev) => (prev - 1 + total) % total);
+  }, [total]);
 
   const activeCert = certificates[activeIndex];
 
+  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (selectedCert !== null) {
         if (e.key === "Escape") setSelectedCert(null);
         return;
       }
-      if (viewMode === "showcase") {
+      if (viewMode === "arc") {
         if (e.key === "ArrowRight") nextCert();
         if (e.key === "ArrowLeft") prevCert();
       }
@@ -46,24 +50,45 @@ export default function Certificates() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedCert, viewMode, nextCert, prevCert]);
 
-  // Touch handlers for mobile swipe
-  const [touchStart, setTouchStart] = useState(null);
-  const handleTouchStart = (e) => setTouchStart(e.touches[0].clientX);
+  // Touch and mouse drag swipe handlers
+  const [dragStartX, setDragStartX] = useState(null);
+
+  const handleTouchStart = (e) => setDragStartX(e.touches[0].clientX);
   const handleTouchEnd = (e) => {
-    if (!touchStart) return;
+    if (dragStartX === null) return;
     const touchEnd = e.changedTouches[0].clientX;
-    const distance = touchStart - touchEnd;
-    if (distance > 50) nextCert();
-    if (distance < -50) prevCert();
-    setTouchStart(null);
+    const distance = dragStartX - touchEnd;
+    if (distance > 45) nextCert();
+    if (distance < -45) prevCert();
+    setDragStartX(null);
+  };
+
+  const handleMouseDown = (e) => setDragStartX(e.clientX);
+  const handleMouseUp = (e) => {
+    if (dragStartX === null) return;
+    const distance = dragStartX - e.clientX;
+    if (distance > 60) nextCert();
+    if (distance < -60) prevCert();
+    setDragStartX(null);
+  };
+
+  // Helper to calculate shortest circular distance along the arc
+  const getDiff = (idx) => {
+    let diff = idx - activeIndex;
+    if (diff > total / 2) diff -= total;
+    if (diff < -total / 2) diff += total;
+    return diff;
   };
 
   return (
-    <section id="certificates" className="py-24 sm:py-32 border-t border-white/5 relative grid-backdrop">
+    <section id="certificates" className="py-24 sm:py-32 border-t border-white/5 relative grid-backdrop overflow-hidden">
+      {/* Background radial ambient lights for curved theatrical atmosphere */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-[#D4FF00]/[0.025] rounded-full blur-[140px] pointer-events-none" />
+
       <div className="container mx-auto px-5 sm:px-8 max-w-6xl relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 sm:mb-20">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
           <div>
             <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-[#9A9AA4] mb-3">
               <span className="w-2 h-2 rounded-full bg-[#D4FF00]"></span>
@@ -74,7 +99,7 @@ export default function Certificates() {
               Certificates & Credentials<span className="text-[#D4FF00]">.</span>
             </h2>
             <p className="text-sm sm:text-base text-[#9A9AA4] max-w-xl font-sans">
-              14 accredited credentials from Google, Google Cloud, Scrimba, and Universities. Every certificate has an authentic verification link and printable PDF.
+              14 verified credentials from Google, Google Cloud, Scrimba, and accredited Universities, presented in a cinematic curved arc gallery.
             </p>
           </div>
 
@@ -82,14 +107,14 @@ export default function Certificates() {
           <div className="flex items-center gap-3">
             <div className="inline-flex p-1 rounded-xl glass-dock border border-white/10">
               <button
-                onClick={() => setViewMode("showcase")}
+                onClick={() => setViewMode("arc")}
                 className={`px-3.5 py-1.5 rounded-lg text-xs font-mono uppercase tracking-wider transition-all cursor-pointer ${
-                  viewMode === "showcase"
+                  viewMode === "arc"
                     ? "bg-[#D4FF00] text-black font-bold shadow-[0_0_12px_rgba(212,255,0,0.3)]"
                     : "text-[#9A9AA4] hover:text-white"
                 }`}
               >
-                Showcase View
+                Curved Arc (3D)
               </button>
               <button
                 onClick={() => setViewMode("grid")}
@@ -106,151 +131,223 @@ export default function Certificates() {
           </div>
         </div>
 
-        {/* VIEW 1: Interactive Showcase View */}
-        {viewMode === "showcase" && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        {/* ============================================================== */}
+        {/* VIEW 1: CINEMATIC CURVED ARC CAROUSEL                          */}
+        {/* ============================================================== */}
+        {viewMode === "arc" && (
+          <div className="flex flex-col items-center">
             
-            {/* Left Column: Visual Certificate Preview Frame */}
-            <div className="lg:col-span-7 flex flex-col gap-6">
-              <div
-                className="relative aspect-[16/11] rounded-2xl glass-panel border border-white/10 p-4 sm:p-6 flex items-center justify-center cursor-pointer group shadow-2xl"
-                onClick={() => setSelectedCert(activeCert)}
-                onTouchStart={handleTouchStart}
-                onTouchEnd={handleTouchEnd}
-              >
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={activeCert.id}
-                    src={activeCert.image}
-                    alt={activeCert.title}
-                    initial={{ opacity: 0, scale: 0.97 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.97 }}
-                    transition={{ duration: 0.25 }}
-                    className="max-h-full max-w-full object-contain rounded-lg drop-shadow-md"
-                  />
-                </AnimatePresence>
+            {/* Curved Arc Stage Viewport */}
+            <div
+              ref={arcContainerRef}
+              className="relative w-full h-[360px] sm:h-[420px] md:h-[460px] flex items-center justify-center select-none overflow-visible"
+              style={{ perspective: "1100px" }}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+              onMouseDown={handleMouseDown}
+              onMouseUp={handleMouseUp}
+            >
+              {certificates.map((cert, idx) => {
+                const diff = getDiff(idx);
+                const absDiff = Math.abs(diff);
 
-                {/* Enlarge Hint */}
-                <div className="absolute bottom-4 right-4 px-3 py-1.5 rounded-full bg-black/85 backdrop-blur-md border border-white/15 text-xs font-mono text-white opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1.5 shadow-md">
-                  <Maximize2 size={12} className="text-[#D4FF00]" />
-                  <span>Inspect Certificate</span>
-                </div>
+                // We display the center card (0), first neighbors (±1), and second neighbors (±2)
+                const isVisible = absDiff <= 2;
+                const isCenter = diff === 0;
 
-                {/* Index Pill */}
-                <div className="absolute top-4 left-4 px-3 py-1 rounded-full glass-dock text-[11px] font-mono text-[#D4FF00] border border-[#D4FF00]/30">
-                  {String(activeCert.id).padStart(2, "0")} / 14
-                </div>
-              </div>
+                // Arc math calculation:
+                // Scale drops as distance from center increases
+                const scale = isCenter ? 1.0 : absDiff === 1 ? 0.82 : 0.66;
 
-              {/* Navigation Controls & Progress */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={prevCert}
-                    className="p-2.5 rounded-xl glass-dock border border-white/10 hover:border-white/30 text-white transition-colors cursor-pointer"
-                    aria-label="Previous Certificate"
+                // Blur levels requested: center has 0 blur, side certificates have ~30% blur (3.5px) and outer cards have more blur
+                const blur = isCenter ? "0px" : absDiff === 1 ? "3.5px" : "7px";
+
+                // Opacity reduces for side cards
+                const opacity = isCenter ? 1.0 : absDiff === 1 ? 0.65 : 0.32;
+
+                // 3D inward rotation along curved arc (like curved display screen)
+                const rotateY = isCenter ? 0 : diff * -16;
+
+                // Arc horizontal displacement
+                const translateX = diff * 86; // in %
+
+                // Arc vertical curve offset (curves down as it spreads left/right)
+                const translateY = Math.pow(absDiff, 1.7) * 16; // in px
+
+                // Z-index priority: center is highest
+                const zIndex = isCenter ? 40 : 30 - absDiff * 10;
+
+                if (!isVisible) return null;
+
+                return (
+                  <motion.div
+                    key={cert.id}
+                    onClick={() => {
+                      if (isCenter) {
+                        setSelectedCert(cert);
+                      } else {
+                        setActiveIndex(idx);
+                      }
+                    }}
+                    animate={{
+                      scale,
+                      opacity,
+                      x: `${translateX}%`,
+                      y: `${translateY}px`,
+                      rotateY,
+                      filter: `blur(${blur})`,
+                      zIndex,
+                    }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 260,
+                      damping: 28,
+                      mass: 0.8,
+                    }}
+                    className={`absolute w-[290px] sm:w-[380px] md:w-[440px] aspect-[16/11] rounded-2xl glass-panel p-3 sm:p-4 flex flex-col items-center justify-center cursor-pointer transition-shadow ${
+                      isCenter
+                        ? "border-[#D4FF00] shadow-[0_0_35px_rgba(212,255,0,0.25)] ring-1 ring-[#D4FF00]/50"
+                        : "border-white/10 hover:border-white/30"
+                    }`}
+                    style={{
+                      transformStyle: "preserve-3d",
+                      willChange: "transform, filter, opacity",
+                    }}
                   >
-                    <ChevronLeft size={16} />
-                  </button>
-                  <button
-                    onClick={nextCert}
-                    className="p-2.5 rounded-xl glass-dock border border-white/10 hover:border-white/30 text-white transition-colors cursor-pointer"
-                    aria-label="Next Certificate"
-                  >
-                    <ChevronRight size={16} />
-                  </button>
-                  <span className="text-xs font-mono text-[#5E606B] ml-2">
-                    {activeIndex + 1} of {certificates.length}
-                  </span>
-                </div>
+                    {/* Certificate Image Frame */}
+                    <div className="relative w-full h-full rounded-xl overflow-hidden bg-black/60 flex items-center justify-center p-1 sm:p-2 border border-white/5">
+                      <img
+                        src={cert.image}
+                        alt={cert.title}
+                        className="max-h-full max-w-full object-contain rounded transition-transform"
+                        draggable={false}
+                      />
 
-                {/* Quick Thumbnails Dots */}
-                <div className="hidden sm:flex items-center gap-1.5 max-w-xs overflow-x-auto">
+                      {/* Center card hover badge */}
+                      {isCenter && (
+                        <div className="absolute inset-0 bg-black/35 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
+                          <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#D4FF00] text-black text-xs font-mono font-bold shadow-lg">
+                            <Maximize2 size={12} />
+                            <span>Click to Enlarge</span>
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Top status indicator on active certificate */}
+                    {isCenter && (
+                      <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/90 border border-[#D4FF00] text-[10px] font-mono text-[#D4FF00] font-bold shadow-md flex items-center gap-1">
+                        <Sparkles size={10} />
+                        <span>Featured Credential</span>
+                      </div>
+                    )}
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Arc Navigation Controls & Drag Hint */}
+            <div className="w-full max-w-xl mt-6 flex flex-col items-center gap-4">
+              
+              {/* Prev / Next / Indicator Toolbar */}
+              <div className="flex items-center justify-between w-full px-4">
+                <button
+                  onClick={prevCert}
+                  className="p-2.5 rounded-xl glass-dock border border-white/10 hover:border-[#D4FF00]/40 text-white hover:text-[#D4FF00] transition-colors cursor-pointer"
+                  aria-label="Previous Certificate"
+                >
+                  <ChevronLeft size={18} />
+                </button>
+
+                {/* Arc Track Dots */}
+                <div className="flex items-center gap-1.5 overflow-x-auto max-w-[280px] sm:max-w-md py-1">
                   {certificates.map((c, i) => (
                     <button
                       key={c.id}
                       onClick={() => setActiveIndex(i)}
                       className={`h-1.5 rounded-full transition-all cursor-pointer ${
                         activeIndex === i
-                          ? "w-6 bg-[#D4FF00]"
+                          ? "w-7 bg-[#D4FF00] shadow-[0_0_8px_#D4FF00]"
                           : "w-2 bg-white/20 hover:bg-white/40"
                       }`}
                       aria-label={`Jump to certificate ${i + 1}`}
                     />
                   ))}
                 </div>
+
+                <button
+                  onClick={nextCert}
+                  className="p-2.5 rounded-xl glass-dock border border-white/10 hover:border-[#D4FF00]/40 text-white hover:text-[#D4FF00] transition-colors cursor-pointer"
+                  aria-label="Next Certificate"
+                >
+                  <ChevronRight size={18} />
+                </button>
               </div>
-            </div>
 
-            {/* Right Column: Detailed Credential Metadata */}
-            <div className="lg:col-span-5 flex flex-col gap-6">
-              <div className="p-7 rounded-2xl glass-panel border border-white/10 flex flex-col gap-5">
-                
-                <div className="flex items-center justify-between pb-3 border-b border-white/5">
-                  <span className="font-mono text-xs text-[#D4FF00] uppercase tracking-wider">
-                    {activeCert.category}
-                  </span>
-                  <span className="inline-flex items-center gap-1 text-[11px] font-mono text-emerald-400">
-                    <ShieldCheck size={12} />
-                    <span>Verified</span>
-                  </span>
-                </div>
+              {/* Center Active Certificate Detail Card */}
+              <motion.div
+                key={activeCert.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="w-full p-6 sm:p-7 rounded-2xl glass-panel border border-white/10 shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-6"
+              >
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 text-[11px] font-mono text-[#D4FF00] uppercase mb-1.5">
+                    <span>{activeCert.category}</span>
+                    <span>•</span>
+                    <span className="text-[#5E606B]">Credential {activeIndex + 1} of {total}</span>
+                  </div>
 
-                <div>
-                  <h3 className="font-display font-bold text-2xl text-white tracking-tight leading-snug">
+                  <h3 className="font-display font-bold text-xl sm:text-2xl text-white tracking-tight leading-snug">
                     {activeCert.title}
                   </h3>
-                  <p className="font-mono text-xs text-[#9A9AA4] mt-1">
-                    Issued by <span className="text-white font-semibold">{activeCert.issuer}</span>
-                  </p>
-                </div>
 
-                {/* Credential Data Points */}
-                <div className="space-y-3 font-mono text-xs text-[#EDEDF2] pt-2">
-                  <div className="flex justify-between py-1.5 border-b border-white/5">
-                    <span className="text-[#5E606B]">Completion Date</span>
-                    <span>{activeCert.date}</span>
-                  </div>
-                  <div className="flex justify-between py-1.5 border-b border-white/5">
-                    <span className="text-[#5E606B]">Credential ID</span>
-                    <span className="text-[#D4FF00]">{activeCert.credentialId}</span>
-                  </div>
-                  <div className="flex justify-between py-1.5 border-b border-white/5">
-                    <span className="text-[#5E606B]">Issuing Organization</span>
-                    <span>{activeCert.issuer}</span>
+                  <div className="flex flex-wrap items-center gap-4 mt-2 text-xs font-mono text-[#9A9AA4]">
+                    <span>Issuer: <strong className="text-white font-medium">{activeCert.issuer}</strong></span>
+                    <span>•</span>
+                    <span>Completed: <strong className="text-white font-medium">{activeCert.date}</strong></span>
+                    <span>•</span>
+                    <span>ID: <code className="text-[#D4FF00]">{activeCert.credentialId}</code></span>
                   </div>
                 </div>
 
-                {/* Verification Actions */}
-                <div className="flex flex-col sm:flex-row gap-3 pt-4">
+                {/* Actions */}
+                <div className="flex items-center gap-3 shrink-0">
                   <a
                     href={activeCert.verifyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#D4FF00] text-black font-bold text-xs font-mono hover:bg-white transition-colors"
+                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#D4FF00] text-black font-bold text-xs font-mono hover:bg-white transition-colors"
                   >
-                    <span>Verify On Coursera</span>
+                    <span>Verify Coursera</span>
                     <ExternalLink size={12} />
                   </a>
 
                   <a
                     href={activeCert.pdf}
                     download
-                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl glass-dock border border-white/10 text-white text-xs font-mono hover:border-white/30 transition-colors"
+                    className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl glass-dock border border-white/10 text-white text-xs font-mono hover:border-white/30 transition-colors"
                   >
                     <Download size={13} />
                     <span>PDF</span>
                   </a>
                 </div>
+              </motion.div>
 
+              {/* Interaction Hint */}
+              <div className="flex items-center gap-2 text-[11px] font-mono text-[#5E606B]">
+                <MousePointerClick size={12} className="text-[#D4FF00]" />
+                <span>Swipe horizontally or click side certificate to rotate arc</span>
               </div>
-            </div>
 
+            </div>
           </div>
         )}
 
-        {/* VIEW 2: Complete 14-Item Grid View */}
+        {/* ============================================================== */}
+        {/* VIEW 2: COMPLETE 14-ITEM GRID VIEW                             */}
+        {/* ============================================================== */}
         {viewMode === "grid" && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {certificates.map((cert) => (
@@ -324,7 +421,7 @@ export default function Certificates() {
       <AnimatePresence>
         {selectedCert && (
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-2xl p-4 sm:p-8"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/92 backdrop-blur-2xl p-4 sm:p-8"
             onClick={() => setSelectedCert(null)}
           >
             <motion.div

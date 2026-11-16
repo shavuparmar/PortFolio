@@ -1,10 +1,24 @@
+import { useState, lazy, Suspense } from "react";
 import { motion } from "framer-motion";
-import { ArrowDown, ArrowUpRight, Download, Github, Linkedin, Mail, MapPin, Sparkles, Terminal } from "lucide-react";
+import { ArrowDown, ArrowUpRight, Download, Github, Linkedin, Mail, MapPin, Sparkles, Terminal, Box, Layers } from "lucide-react";
 import personal from "../details/personal";
 import cardFront from "../Businescards/dey1.png";
 import orderAppImg from "../assets/orderapp.png";
 
+const ThreeHeroCanvas = lazy(() => import("./ThreeHeroCanvas"));
+
+function ThreeFallback() {
+  return (
+    <div className="w-full h-[360px] sm:h-[420px] lg:h-[480px] flex flex-col items-center justify-center gap-3">
+      <div className="w-12 h-12 rounded-full border-2 border-[#D4FF00]/40 border-t-[#D4FF00] animate-spin" />
+      <span className="font-mono text-xs text-[#9A9AA4]">Initializing 3D Kinetic Engine...</span>
+    </div>
+  );
+}
+
 export default function Hero() {
+  const [heroVisualMode, setHeroVisualMode] = useState("cards"); // 'cards' | '3d'
+
   const scrollToWork = (e) => {
     e.preventDefault();
     const element = document.getElementById("work") || document.getElementById("projects");
@@ -171,7 +185,7 @@ export default function Hero() {
 
           </div>
 
-          {/* Right Column: Layered Art-Directed Studio Composition */}
+          {/* Right Column: Interactive 3D & Studio Visual Frame */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -180,59 +194,119 @@ export default function Hero() {
           >
             <div className="relative mx-auto max-w-md">
               
-              {/* Back Card: Korder Production System Mockup */}
-              <div className="relative rounded-2xl p-4 glass-panel border border-white/10 shadow-2xl backdrop-blur-xl">
-                <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/5 text-[11px] font-mono text-[#9A9AA4]">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
-                    <span className="text-white font-medium">Keshav Krupa // Korder OMS</span>
-                  </div>
-                  <span className="text-[#D4FF00]">Full Stack System</span>
+              {/* Header Mode Switcher Dock */}
+              <div className="flex items-center justify-between pb-3 mb-3">
+                <div className="inline-flex p-1 rounded-xl glass-dock border border-white/10">
+                  <button
+                    onClick={() => setHeroVisualMode("3d")}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-mono uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5 ${
+                      heroVisualMode === "3d"
+                        ? "bg-[#D4FF00] text-black font-bold shadow-[0_0_12px_rgba(212,255,0,0.3)]"
+                        : "text-[#9A9AA4] hover:text-white"
+                    }`}
+                  >
+                    <Box size={12} />
+                    <span>Interactive 3D</span>
+                  </button>
+                  <button
+                    onClick={() => setHeroVisualMode("cards")}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-mono uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5 ${
+                      heroVisualMode === "cards"
+                        ? "bg-[#D4FF00] text-black font-bold shadow-[0_0_12px_rgba(212,255,0,0.3)]"
+                        : "text-[#9A9AA4] hover:text-white"
+                    }`}
+                  >
+                    <Layers size={12} />
+                    <span>Case Previews</span>
+                  </button>
                 </div>
-                <div className="relative rounded-xl overflow-hidden aspect-[16/10] bg-black/60 border border-white/5">
-                  <img
-                    src={orderAppImg}
-                    alt="Keshav Krupa Order Management System"
-                    className="w-full h-full object-cover object-top opacity-85 hover:opacity-100 transition-opacity"
-                  />
-                  <div className="absolute bottom-2 left-2 right-2 px-2.5 py-1.5 rounded-lg bg-black/80 backdrop-blur-md border border-white/10 flex items-center justify-between text-[10px] font-mono">
-                    <span className="text-[#9A9AA4]">Live Production Client App</span>
-                    <span className="text-[#D4FF00]">Next.js • Node • Mongo</span>
-                  </div>
+
+                <div className="px-2.5 py-1 rounded-full glass-dock border border-[#D4FF00]/30 flex items-center gap-1.5 text-[10px] font-mono text-[#D4FF00]">
+                  <Sparkles size={10} />
+                  <span>Interactive Engine</span>
                 </div>
               </div>
 
-              {/* Floating Overlapping Card: Deyzora Infotech Physical Card Preview */}
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="absolute -bottom-8 -left-6 sm:-left-10 w-[80%] rounded-2xl p-3 glass-panel-elevated border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
-              >
-                <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/5 text-[10px] font-mono">
-                  <span className="text-white font-medium">Deyzora Infotech</span>
-                  <span className="text-[#D4FF00]">Print & Branding</span>
+              {/* Mode 1: Interactive 3D Sculpture */}
+              {heroVisualMode === "3d" ? (
+                <div className="relative rounded-2xl glass-panel border border-white/10 p-3 sm:p-4 shadow-2xl backdrop-blur-xl overflow-hidden">
+                  <Suspense fallback={<ThreeFallback />}>
+                    <ThreeHeroCanvas />
+                  </Suspense>
+
+                  {/* Overlaid Bottom Meta Strip */}
+                  <div className="pt-3 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-[#9A9AA4]">
+                    <div className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#D4FF00]"></span>
+                      <span className="text-white">Three.js Kinetic Engine</span>
+                    </div>
+                    <span className="text-[#5E606B]">Code × Design Synthesis</span>
+                  </div>
                 </div>
-                <div className="relative rounded-lg overflow-hidden border border-white/10 aspect-[16/9] bg-stone-900">
-                  <img
-                    src={cardFront}
-                    alt="Deyzora Infotech Business Card"
-                    className="w-full h-full object-cover"
-                  />
+              ) : (
+                /* Mode 2: Layered Work Previews */
+                <div className="relative">
+                  {/* Back Card: Korder Production System Mockup */}
+                  <div className="relative rounded-2xl p-4 glass-panel border border-white/10 shadow-2xl backdrop-blur-xl">
+                    <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/5 text-[11px] font-mono text-[#9A9AA4]">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+                        <span className="text-white font-medium">Keshav Krupa // Korder OMS</span>
+                      </div>
+                      <span className="text-[#D4FF00]">Full Stack System</span>
+                    </div>
+                    <div className="relative rounded-xl overflow-hidden aspect-[16/10] bg-black/60 border border-white/5">
+                      <img
+                        src={orderAppImg}
+                        alt="Keshav Krupa Order Management System"
+                        className="w-full h-full object-cover object-top opacity-85 hover:opacity-100 transition-opacity"
+                      />
+                      <div className="absolute bottom-2 left-2 right-2 px-2.5 py-1.5 rounded-lg bg-black/80 backdrop-blur-md border border-white/10 flex items-center justify-between text-[10px] font-mono">
+                        <span className="text-[#9A9AA4]">Live Production Client App</span>
+                        <span className="text-[#D4FF00]">Next.js • Node • Mongo</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Floating Overlapping Card: Deyzora Infotech Physical Card Preview */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="absolute -bottom-8 -left-6 sm:-left-10 w-[80%] rounded-2xl p-3 glass-panel-elevated border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.8)]"
+                  >
+                    <div className="flex items-center justify-between pb-2 mb-2 border-b border-white/5 text-[10px] font-mono">
+                      <span className="text-white font-medium">Deyzora Infotech</span>
+                      <span className="text-[#D4FF00]">Print & Branding</span>
+                    </div>
+                    <div className="relative rounded-lg overflow-hidden border border-white/10 aspect-[16/9] bg-stone-900">
+                      <img
+                        src={cardFront}
+                        alt="Deyzora Infotech Business Card"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="pt-2 flex items-center justify-between text-[9px] font-mono text-[#9A9AA4]">
+                      <span>300 DPI // CMYK Print</span>
+                      <a href="#business-card" className="text-[#D4FF00] hover:underline flex items-center gap-0.5">
+                        <span>Inspect</span>
+                        <ArrowUpRight size={10} />
+                      </a>
+                    </div>
+                  </motion.div>
                 </div>
-                <div className="pt-2 flex items-center justify-between text-[9px] font-mono text-[#9A9AA4]">
-                  <span>300 DPI // CMYK Print</span>
-                  <a href="#business-card" className="text-[#D4FF00] hover:underline flex items-center gap-0.5">
-                    <span>Inspect</span>
-                    <ArrowUpRight size={10} />
-                  </a>
-                </div>
-              </motion.div>
+              )}
 
               {/* Verified Badge */}
-              <div className="absolute -top-4 -right-4 px-3 py-1.5 rounded-full glass-dock border border-[#D4FF00]/30 shadow-lg flex items-center gap-1.5 text-[10px] font-mono text-[#D4FF00]">
-                <Sparkles size={11} />
-                <span>14 Verified Coursera Credentials</span>
+              <div className="mt-4 px-3 py-1.5 rounded-full glass-dock border border-[#D4FF00]/30 shadow-lg flex items-center justify-between text-[10px] font-mono text-[#EDEDF2]">
+                <div className="flex items-center gap-1.5 text-[#D4FF00]">
+                  <Sparkles size={11} />
+                  <span>14 Accredited Credentials</span>
+                </div>
+                <a href="#certificates" className="text-[#9A9AA4] hover:text-[#D4FF00] transition-colors flex items-center gap-1">
+                  <span>View Curved Gallery</span>
+                  <ArrowUpRight size={10} />
+                </a>
               </div>
 
             </div>

@@ -203,7 +203,7 @@ export default function BusinessCard() {
               </div>
 
               <p className="text-xs sm:text-sm text-[#9A9AA4] leading-relaxed font-sans">
-                {businessCardData.description}
+                {businessCardData?.description || businessCardData?.concept}
               </p>
 
               {/* Design Principles / Highlights */}
@@ -211,7 +211,7 @@ export default function BusinessCard() {
                 <span className="font-mono text-[11px] text-white uppercase tracking-wider block">
                   Design Specifications & Identity
                 </span>
-                {businessCardData.highlights.map((h, i) => (
+                {(businessCardData?.highlights || []).map((h, i) => (
                   <div key={i} className="flex items-start gap-2 text-xs text-[#EDEDF2] font-sans">
                     <CheckCircle2 size={13} className="text-[#D4FF00] mt-0.5 shrink-0" />
                     <span>{h}</span>
@@ -237,7 +237,7 @@ export default function BusinessCard() {
 
               {/* Specs Pill List */}
               <div className="flex flex-wrap gap-2 pt-2 border-t border-white/5">
-                {businessCardData.specs.map((spec) => (
+                {(businessCardData?.specs || businessCardData?.tags || []).map((spec) => (
                   <span
                     key={spec}
                     className="px-2.5 py-1 rounded-md glass-dock border border-white/5 text-[10px] font-mono text-[#EDEDF2]"
